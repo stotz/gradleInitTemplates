@@ -6,6 +6,10 @@ plugins {
 group = "{{ group }}"
 version = "{{ version }}"
 
+repositories {
+    mavenCentral()
+}
+
 application {
     mainClass = "io.ktor.server.netty.EngineMain"
 }
