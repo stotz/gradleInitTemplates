@@ -1,6 +1,6 @@
 plugins {
-    kotlin("jvm") version "{{ kotlin_version }}"
-    kotlin("plugin.serialization") version "{{ kotlin_version }}"
+    alias(libs.plugins.kotlin.jvm)
+    alias(libs.plugins.ktor)
     application
 }
 
@@ -11,37 +11,25 @@ repositories {
     mavenCentral()
 }
 
-val ktorVersion = "3.0.3"
-
 dependencies {
-    implementation("io.ktor:ktor-server-core:$ktorVersion")
-    implementation("io.ktor:ktor-server-netty:$ktorVersion")
-    implementation("io.ktor:ktor-server-content-negotiation:$ktorVersion")
-    implementation("io.ktor:ktor-serialization-kotlinx-json:$ktorVersion")
+    implementation(libs.ktor.server.core)
+    implementation(libs.ktor.server.netty)
+    implementation(libs.logback.classic)
     
-    {% if 'auth' in config('ktor_features', ['serialization']) %}
-    implementation("io.ktor:ktor-server-auth:$ktorVersion")
-    implementation("io.ktor:ktor-server-auth-jwt:$ktorVersion")
-    {% endif %}
-    
-    {% if 'websockets' in config('ktor_features', ['serialization']) %}
-    implementation("io.ktor:ktor-server-websockets:$ktorVersion")
-    {% endif %}
-    
-    implementation("ch.qos.logback:logback-classic:1.5.15")
-    
-    testImplementation(kotlin("test"))
-    testImplementation("io.ktor:ktor-server-test-host:$ktorVersion")
+    testImplementation(libs.ktor.server.test.host)
+    testImplementation(libs.kotlin.test)
 }
 
 kotlin {
     jvmToolchain({{ jdk_version }})
 }
 
-application {
-    mainClass.set("{{ group }}.ApplicationKt")
+java {
+    toolchain {
+        languageVersion = JavaLanguageVersion.of({{ jdk_version }})
+    }
 }
 
-tasks.test {
-    useJUnitPlatform()
+application {
+    mainClass.set("{{ group }}.ApplicationKt")
 }

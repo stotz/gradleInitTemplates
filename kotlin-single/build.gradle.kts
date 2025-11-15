@@ -1,5 +1,5 @@
 plugins {
-    kotlin("jvm") version "{{ kotlin_version }}"
+    alias(libs.plugins.kotlin.jvm)
     application
 }
 
@@ -41,7 +41,7 @@ tasks.jar {
         attributes(
             "Implementation-Title" to "{{ project_name }}",
             "Implementation-Version" to "{{ version }}",
-            "Implementation-Vendor" to "{{ config('custom.company', 'Unknown') }}"
+            "Implementation-Vendor" to "Unknown"
         )
     }
 }
