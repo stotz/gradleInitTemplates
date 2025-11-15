@@ -6,5 +6,3 @@ pluginManagement {
 }
 
 rootProject.name = "{{ project_name }}"
-
-enableFeaturePreview("TYPESAFE_PROJECT_ACCESSORS")
