@@ -4,8 +4,8 @@ plugins {
     alias(libs.plugins.ktor)
 }
 
-group = "{{ group }}"
-version = "{{ version }}"
+group = "{{ @@01|Maven group ID (e.g. com.company)=com.example@@group }}"
+version = "{{ @@02|Application version (e.g. 1.0.0)=1.0.0@@version }}"
 
 repositories {
     mavenCentral()
@@ -13,6 +13,10 @@ repositories {
 
 application {
     mainClass = "io.ktor.server.netty.EngineMain"
+}
+
+kotlin {
+    jvmToolchain({{ @@03|(11|17|21)|JDK version=21@@jdk_version }})
 }
 
 dependencies {

@@ -2,8 +2,8 @@ package {{ group }}
 
 /**
  * Main entry point for {{ project_name }}
- * 
- * Generated: {{ date }}
+ *
+ * Generated: {{ now().strftime('%Y-%m-%d %H:%M:%S') }}
  * {% if config('custom.author') %}@author {{ config('custom.author') }}{% endif %}
  */
 fun main() {
