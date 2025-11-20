@@ -1,4 +1,4 @@
-package {{ group | replace('.', '/') | replace('/', '.') }}
+package {{ group }}
 
 /**
  * Main entry point for {{ app_name }}

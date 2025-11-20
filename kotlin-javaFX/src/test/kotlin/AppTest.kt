@@ -1,4 +1,4 @@
-package {{ group | replace('.', '/') | replace('/', '.') }}
+package {{ group }}
 
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.Assertions.*
