@@ -72,6 +72,28 @@ Ktor server application.
   --config ktor.features=auth,serialization,websockets
 ```
 
+### kotlin-javaFX
+Modern JavaFX desktop application with Kotlin.
+
+**Features:**
+- JavaFX 25
+- Ikonli (icon library with FontAwesome 5)
+- ControlsFX (enhanced controls)
+- FormsFX (declarative forms)
+- ValidatorFX (input validation)
+- Beryx JLink (native packaging)
+- JDK 23 support
+- Cross-platform (Windows, Linux, macOS)
+
+**Usage:**
+```bash
+./gradleInit.py init my-javafx-app \
+  --template kotlin-javaFX \
+  --group com.mycompany \
+  --config jdk_version=23 \
+  --config app_name="My JavaFX App"
+```
+
 ## Template Structure
 
 Each template follows this structure:

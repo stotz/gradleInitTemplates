@@ -1,0 +1,19 @@
+package {{ group | replace('.', '/') | replace('/', '.') }}
+
+/**
+ * Main entry point for {{ app_name }}
+ *
+ * Generated: {{ now().strftime('%Y-%m-%d %H:%M:%S') }}
+ */
+fun main() {
+    val app = Main()
+    app.run()
+}
+
+class Main {
+    fun run() {
+        println("Welcome to {{ app_name }}!")
+        println("Built with Kotlin {{ kotlin_version }}")
+        javafx.application.Application.launch(App::class.java)
+    }
+}
