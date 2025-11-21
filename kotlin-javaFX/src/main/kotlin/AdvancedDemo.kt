@@ -333,7 +333,7 @@ class AdvancedDemo : Application() {
             isClosable = false
 
             // Rating control
-            val rating = Rating(5, 3.0).apply {
+            val rating = Rating(5, 3).apply {
                 isUpdateOnHover = true
             }
             val ratingLabel = Label("Rating: 3.0")
