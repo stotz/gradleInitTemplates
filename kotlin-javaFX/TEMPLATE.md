@@ -77,8 +77,12 @@ cd my-javafx-app
 # Build the project
 ./gradlew build
 
-# Run the application
+# Run the application (shows selection screen)
 ./gradlew run
+
+# Or launch specific demo directly:
+./gradlew run --args="--app"        # Simple starter
+./gradlew run --args="--advanced"   # Feature showcase
 
 # Run tests
 ./gradlew test
@@ -87,6 +91,10 @@ cd my-javafx-app
 ./gradlew jlink
 ./gradlew jlinkZip
 ```
+
+The application includes an **interactive launcher** that lets you choose between:
+- **App** - Clean, professional starter (for building your application)
+- **AdvancedDemo** - Comprehensive feature showcase (for learning and reference)
 
 ## Configuration
 

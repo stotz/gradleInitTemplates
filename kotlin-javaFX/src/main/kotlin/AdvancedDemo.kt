@@ -19,7 +19,6 @@ import org.controlsfx.control.ToggleSwitch
 import com.dlsc.formsfx.model.structure.Field
 import com.dlsc.formsfx.model.structure.Form
 import com.dlsc.formsfx.model.structure.Section
-import com.dlsc.formsfx.model.structure.SingleSelectionField
 import com.dlsc.formsfx.view.renderer.FormRenderer
 import net.synedra.validatorfx.Validator
 import kotlin.math.hypot
@@ -84,8 +83,9 @@ class AdvancedDemo : Application() {
                 .placeholder("user@example.com")
                 .required(true)
 
-            val countryField = SingleSelectionField.ofStringType(
-                listOf("Switzerland", "Germany", "Austria", "France", "Italy")
+            val countryField = Field.ofSingleSelectionType(
+                listOf("Switzerland", "Germany", "Austria", "France", "Italy"),
+                0
             )
                 .label("Country")
                 .required(true)
@@ -334,7 +334,7 @@ class AdvancedDemo : Application() {
 
             // Rating control
             val rating = Rating(5, 3.0).apply {
-                updateOnHover = true
+                isUpdateOnHover = true
             }
             val ratingLabel = Label("Rating: 3.0")
             rating.ratingProperty().addListener { _, _, newValue ->
@@ -356,12 +356,13 @@ class AdvancedDemo : Application() {
 
             // Custom TextField with clear button
             val searchField = CustomTextField().apply {
+                val textField = this
                 promptText = "Search..."
                 left = FontIcon(FontAwesomeSolid.SEARCH)
                 right = Button().apply {
                     graphic = FontIcon(FontAwesomeSolid.TIMES)
                     style = "-fx-background-color: transparent;"
-                    setOnAction { this@CustomTextField.clear() }
+                    setOnAction { textField.clear() }
                 }
             }
 
