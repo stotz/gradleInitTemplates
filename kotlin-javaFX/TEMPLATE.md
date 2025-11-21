@@ -123,14 +123,25 @@ All JavaFX modules are included:
 
 ## Sample Application
 
-The generated project includes a sample application demonstrating:
+The generated project includes a clean starter application demonstrating:
 
-1. **Ikonli Icons** - FontAwesome 5 icons in toolbar
-2. **FormsFX Forms** - Declarative form creation
-3. **ValidatorFX** - Email validation with visual feedback
-4. **ControlsFX Notifications** - Toast notifications
-5. **ControlsFX PopOver** - Popup messages
-6. **JavaFX Canvas** - Vector graphics with hit-testing
+1. **Menu Bar** - File, Edit, Help menus with keyboard shortcuts
+2. **Toolbar** - Icon buttons using FontAwesome via Ikonli
+3. **Interactive Buttons** - Click events with counter
+4. **Clickable Labels** - Custom styled labels with hover effects
+5. **Event Handling** - Mouse clicks, hover enter/exit
+6. **Status Bar** - Bottom status information display
+7. **Toast Notifications** - ControlsFX notifications for user feedback
+8. **About Dialog** - Standard JavaFX Alert dialog
+
+**Demo Content:** 
+The center area contains demo content showing:
+- Click counter button
+- Color-coded clickable labels (Red, Green, Blue, Yellow)
+- Instructions for customization
+
+**Easy Removal:**
+All demo content is in the `createContent()` method. Simply remove it and add your own UI while keeping the BorderPane structure with menu, toolbar, and status bar.
 
 ## Next Steps
 
