@@ -282,10 +282,10 @@ class App : Application() {
                 Label("4. Use FontAwesome icons via Ikonli"),
                 Label("5. Use Notifications for toast messages")
             )
-            instructionLabels.forEach {
-                it.style = "-fx-font-size: 10px; -fx-text-fill: gray;"
-                it.wrapText = true
-                children.add(it)
+            instructionLabels.forEach { label ->
+                label.style = "-fx-font-size: 10px; -fx-text-fill: gray;"
+                label.isWrapText = true
+                children.add(label)
             }
         }
     }
@@ -409,7 +409,7 @@ class App : Application() {
 
             eventLog = TextArea().apply {
                 isEditable = false
-                wrapText = true
+                isWrapText = true
                 prefRowCount = 30
                 style = "-fx-font-family: 'Courier New'; -fx-font-size: 10px;"
             }
