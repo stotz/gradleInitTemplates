@@ -1,9 +1,13 @@
 [versions]
 kotlin = "{{ kotlin_version }}"
 junit = "5.10.1"
+assertj = "3.24.2"
+mockk = "1.13.8"
 
 [libraries]
 junit-jupiter = { module = "org.junit.jupiter:junit-jupiter", version.ref = "junit" }
+assertj-core = { module = "org.assertj:assertj-core", version.ref = "assertj" }
+mockk = { module = "io.mockk:mockk", version.ref = "mockk" }
 
 [plugins]
 kotlin-jvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlin" }
