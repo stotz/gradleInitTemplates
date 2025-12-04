@@ -1,0 +1,60 @@
+# Central Version Catalog for gradleInitTemplates
+# This file is the single source of truth for all dependency versions.
+# Run ./update_versions.py to propagate changes to all template libs.versions.toml files.
+
+[versions]
+# Kotlin
+# https://mvnrepository.com/artifact/org.jetbrains.kotlin/kotlin-stdlib
+kotlin = "2.2.21"
+
+# JUnit (5.x stable, 6.x is milestone/preview)
+# https://mvnrepository.com/artifact/org.junit.jupiter/junit-jupiter-api
+junit = "6.0.1"
+
+# Testing
+# https://mvnrepository.com/artifact/org.assertj/assertj-core
+assertj = "3.27.6"
+# https://mvnrepository.com/artifact/io.ktor/ktor-client-core
+mockk = "1.14.6"
+
+# Ktor https://mvnrepository.com/artifact/io.ktor/ktor-client-core
+ktor = "3.3.3"
+# https://mvnrepository.com/artifact/ch.qos.logback/logback-core
+logback = "1.5.21"
+
+# Spring Boot
+# https://mvnrepository.com/artifact/org.springframework.boot/spring-boot
+spring-boot = "3.5.8"
+# https://mvnrepository.com/artifact/io.spring.dependency-management/io.spring.dependency-management.gradle.plugin
+spring-dependency-management = "1.1.7"
+
+# JavaFX
+# https://mvnrepository.com/artifact/org.openjfx/javafx-base
+javafx = "25.0.1"
+# https://mvnrepository.com/artifact/org.controlsfx/controlsfx
+controlsfx = "11.2.2"
+# https://mvnrepository.com/artifact/com.dlsc.formsfx/formsfx-core
+formsfx = "11.6.0"
+# https://mvnrepository.com/artifact/net.synedra/validatorfx
+validatorfx = "0.6.3"
+# https://mvnrepository.com/artifact/org.kordamp.ikonli
+ikonli = "12.4.0"
+# https://mvnrepository.com/artifact/org.beryx.jlink/org.beryx.jlink.gradle.plugin
+beryx_jlink = "3.1.3"
+
+[urls]
+# Maven Central search URLs for version lookup
+kotlin = "https://central.sonatype.com/artifact/org.jetbrains.kotlin/kotlin-stdlib"
+junit = "https://central.sonatype.com/artifact/org.junit.jupiter/junit-jupiter"
+assertj = "https://central.sonatype.com/artifact/org.assertj/assertj-core"
+mockk = "https://central.sonatype.com/artifact/io.mockk/mockk"
+ktor = "https://central.sonatype.com/artifact/io.ktor/ktor-server-core"
+logback = "https://central.sonatype.com/artifact/ch.qos.logback/logback-classic"
+spring-boot = "https://central.sonatype.com/artifact/org.springframework.boot/spring-boot"
+spring-dependency-management = "https://central.sonatype.com/artifact/io.spring.dependency-management/io.spring.dependency-management.gradle.plugin"
+javafx = "https://central.sonatype.com/artifact/org.openjfx/javafx-base"
+controlsfx = "https://central.sonatype.com/artifact/org.controlsfx/controlsfx"
+formsfx = "https://central.sonatype.com/artifact/com.dlsc.formsfx/formsfx-core"
+validatorfx = "https://central.sonatype.com/artifact/net.synedra/validatorfx"
+ikonli = "https://central.sonatype.com/artifact/org.kordamp.ikonli/ikonli-javafx"
+beryx_jlink = "https://central.sonatype.com/artifact/org.beryx.jlink/org.beryx.jlink.gradle.plugin"

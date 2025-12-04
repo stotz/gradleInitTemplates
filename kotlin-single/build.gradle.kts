@@ -22,13 +22,14 @@ dependencies {
     testImplementation(libs.mockk)
 }
 
+val jdkVersion = libs.versions.jdk.get()
 kotlin {
-    jvmToolchain({{ @@03|(11|17|21)|JDK version=21@@jdk_version }})
+    jvmToolchain(jdkVersion.toInt())
 }
 
 java {
     toolchain {
-        languageVersion = JavaLanguageVersion.of({{ jdk_version }})
+        languageVersion = JavaLanguageVersion.of(jdkVersion)
     }
 }
 

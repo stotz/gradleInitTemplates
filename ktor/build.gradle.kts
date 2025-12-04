@@ -17,8 +17,9 @@ application {
     mainClass = "io.ktor.server.netty.EngineMain"
 }
 
+val jdkVersion = libs.versions.jdk.get()
 kotlin {
-    jvmToolchain({{ @@03|(11|17|21)|JDK version=21@@jdk_version }})
+    jvmToolchain(jdkVersion.toInt())
 }
 
 dependencies {

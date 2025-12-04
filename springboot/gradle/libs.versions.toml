@@ -1,5 +1,6 @@
 [versions]
-kotlin = "2.2.0"
+jdk = "{{ @@03|(11|17|21|23)|JDK version=21@@jdk_version }}"
+kotlin = "2.2.21"
 spring-boot = "3.4.1"
 spring-dependency-management = "1.1.7"
 
