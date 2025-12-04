@@ -51,12 +51,8 @@ java -jar build/libs/{{ project_name }}-all.jar
 
 ## API Endpoints
 
-- `GET /` - Returns a welcome message
-- `GET /health` - Health check endpoint
-
-## Configuration
-
-Server configuration is in `src/main/resources/application.yaml`.
+- `GET /` - Returns a JSON welcome message
+- `GET /hello?name=YourName` - Returns a personalized greeting
 
 ## Project Structure
 
@@ -64,11 +60,11 @@ Server configuration is in `src/main/resources/application.yaml`.
 src/
   main/
     kotlin/       - Application source code
-    resources/    - Configuration files (application.yaml)
+    resources/    - Configuration files (logback.xml)
   test/
     kotlin/       - Test source code
 ```
 
-## License
+## Version
 
-{{ vendor }} - {{ version }}
+{{ group }}:{{ project_name }}:{{ version }}

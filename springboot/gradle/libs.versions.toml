@@ -1,7 +1,7 @@
 [versions]
 jdk = "{{ @@03|(11|17|21|23)|JDK version=21@@jdk_version }}"
 kotlin = "2.2.21"
-spring-boot = "3.5.8"
+spring-boot = "{{ @@04|Spring Boot version (e.g. 3.5.8, 4.0.0)=4.0.0@@spring_boot_version }}"
 spring-dependency-management = "1.1.7"
 
 [libraries]

@@ -14,7 +14,7 @@ repositories {
 }
 
 application {
-    mainClass = "io.ktor.server.netty.EngineMain"
+    mainClass = "{{ group }}.ApplicationKt"
 }
 
 val jdkVersion = libs.versions.jdk.get()
