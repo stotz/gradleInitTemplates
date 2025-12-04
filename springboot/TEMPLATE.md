@@ -9,6 +9,10 @@ requirements:
   kotlin: ">=2.0"
   jdk: ">=21"
 
+raw_copy:
+  - dump_src.sh
+  - dump_src.cfg
+
 arguments:
   - name: group
     type: string
