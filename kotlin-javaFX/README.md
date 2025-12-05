@@ -8,7 +8,7 @@ A modern JavaFX desktop application built with Kotlin.
 - **Version**: {{ version }}
 - **Kotlin**: {{ kotlin_version }}
 - **JDK**: {{ jdk_version }}
-- **Vendor**: {{ vendor }}
+- **Company**: {{ company }}
 
 ## Features
 
@@ -212,4 +212,4 @@ dependencies {
 
 ## License
 
-{{ vendor }}
+{{ company }}

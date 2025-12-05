@@ -70,4 +70,4 @@ gradle/
 
 ## License
 
-{{ vendor }} - {{ version }}
+{{ company }} - {{ version }}

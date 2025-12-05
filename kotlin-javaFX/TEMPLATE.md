@@ -108,7 +108,7 @@ The template uses these configuration values:
 - `version` - Project version (default: `1.0.0`)
 - `app_name` - Application name for display
 - `main_class` - Fully qualified main class name
-- `vendor` - Application vendor name
+- `company` - Application company name
 - `kotlin_version` - Kotlin version (from gradleInit defaults)
 - `jdk_version` - JDK version (default: 23, minimum 21)
 

@@ -99,7 +99,7 @@ tasks.jar {
         attributes(
             "Implementation-Title" to "{{ @@05|Application display name=My JavaFX App@@app_name }}",
             "Implementation-Version" to version,
-            "Implementation-Vendor" to "{{ @@06|Vendor/Author name=Example Corp@@vendor }}"
+            "Implementation-Vendor" to "{{ @@06|Company or author name=Example Corp@@company }}"
         )
     }
 }
