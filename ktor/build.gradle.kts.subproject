@@ -17,5 +17,5 @@ dependencies {
     implementation(libs.logback.classic)
 
     testImplementation(libs.ktor.server.test.host)
-    testImplementation(libs.kotlin.test.junit)
+    // Note: kotlin("test") from convention plugin already provides JUnit5 support
 }
