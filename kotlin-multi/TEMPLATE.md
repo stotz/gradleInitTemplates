@@ -12,6 +12,8 @@ requirements:
 raw_copy:
   - dump_src.sh
   - dump_src.cfg
+  - gradlew
+  - gradlew.bat
 
 arguments:
   - name: group
