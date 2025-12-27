@@ -3,7 +3,7 @@ plugins {
 }
 
 dependencies {
-    implementation(libs.plugins.kotlin.jvm.get().let { 
-        "${it.pluginId}:${it.pluginId}.gradle.plugin:${it.version}" 
-    })
+    // Kotlin plugin for convention plugins
+    // Version should match kotlin version in gradle/libs.versions.toml
+    implementation("org.jetbrains.kotlin:kotlin-gradle-plugin:{{ kotlin_version }}")
 }
