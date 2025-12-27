@@ -4,13 +4,9 @@ dependencyResolutionManagement {
     repositories {
         mavenCentral()
     }
-
-    versionCatalogs {
-        create("libs") {
-            from(files("gradle/libs.versions.toml"))
-        }
-    }
 }
+
+// Version catalog "libs" is auto-discovered from gradle/libs.versions.toml
 
 // Subprojects are added here by 'gradleInit subproject' command
 // Examples:
