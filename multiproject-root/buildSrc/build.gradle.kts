@@ -2,6 +2,11 @@ plugins {
     `kotlin-dsl`
 }
 
+repositories {
+    mavenCentral()
+    gradlePluginPortal()
+}
+
 dependencies {
     // Kotlin plugin for convention plugins
     // Version should match kotlin version in gradle/libs.versions.toml
