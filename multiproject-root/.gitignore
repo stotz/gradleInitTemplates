@@ -1,0 +1,51 @@
+# Java / Kotlin compiled artifacts
+*.class
+*.jar
+*.war
+*.ear
+*.ktclass
+
+# Gradle Wrapper (must be after *.jar)
+!gradle/wrapper/gradle-wrapper.jar
+
+# Gradle build directories
+build/
+.gradle/
+buildSrc/build/
+
+# IDE settings
+.idea/
+*.iml
+*.ipr
+*.iws
+.project
+.classpath
+.settings/
+*.swp
+*~
+.vscode/
+
+# OS generated files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# Local configuration
+local.properties
+*.local
+
+# Logs
+*.log
+logs/
+
+# Test output
+test-output/
+test-results/
+
+# Distribution
+out/
+dist/

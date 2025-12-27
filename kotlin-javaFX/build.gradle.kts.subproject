@@ -1,0 +1,41 @@
+plugins {
+    id("kotlin-common-conventions")
+    java
+    application
+    alias(libs.plugins.beryx.jlink)
+}
+
+val os = org.gradle.internal.os.OperatingSystem.current()
+val jfxClassifier = when {
+    os.isWindows -> "win"
+    os.isLinux -> "linux"
+    os.isMacOsX -> "mac"
+    else -> throw GradleException("Unsupported OS for JavaFX")
+}
+
+dependencies {
+    implementation(libs.javafx.base) { artifact { classifier = jfxClassifier } }
+    implementation(libs.javafx.graphics) { artifact { classifier = jfxClassifier } }
+    implementation(libs.javafx.controls) { artifact { classifier = jfxClassifier } }
+    implementation(libs.javafx.web) { artifact { classifier = jfxClassifier } }
+
+    implementation(libs.controlsfx)
+    implementation(libs.formsfx.core) { exclude(group = "org.openjfx") }
+    implementation(libs.validatorfx)
+
+    implementation(libs.ikonli.javafx)
+    implementation(libs.ikonli.fontawesome5)
+}
+
+application {
+    mainClass.set("{{ group }}.MainKt")
+}
+
+tasks.jar {
+    manifest {
+        attributes(
+            "Implementation-Title" to project.name,
+            "Implementation-Version" to version
+        )
+    }
+}

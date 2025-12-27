@@ -1,0 +1,13 @@
+plugins {
+    id("kotlin-common-conventions")
+    application
+}
+
+application {
+    mainClass = "{{ group }}.MainKt"
+}
+
+dependencies {
+    // Add subproject-specific dependencies here
+    // Example: implementation(project(":core"))
+}

@@ -1,0 +1,18 @@
+plugins {
+    id("kotlin-common-conventions")
+    alias(libs.plugins.kotlin.spring)
+    alias(libs.plugins.spring.boot)
+    alias(libs.plugins.spring.dependency.management)
+}
+
+dependencies {
+    implementation(libs.spring.boot.starter.web)
+    implementation(libs.jackson.module.kotlin)
+    implementation(libs.kotlin.reflect)
+
+    testImplementation(libs.spring.boot.starter.test)
+}
+
+tasks.withType<Test> {
+    useJUnitPlatform()
+}
