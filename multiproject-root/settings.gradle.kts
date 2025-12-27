@@ -1,7 +1,6 @@
 rootProject.name = "{{ project_name }}"
 
 dependencyResolutionManagement {
-    repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
     repositories {
         mavenCentral()
     }
@@ -14,4 +13,7 @@ dependencyResolutionManagement {
 }
 
 // Subprojects are added here by 'gradleInit subproject' command
-// Example: include("api", "core", "ui")
+// Examples:
+//   gradleInit subproject api --template ktor
+//   gradleInit subproject core --template kotlin-single
+//   gradleInit subproject ui --template kotlin-javaFX
