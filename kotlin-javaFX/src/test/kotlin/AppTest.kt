@@ -12,20 +12,20 @@ import org.junit.jupiter.api.Assertions.*
 class AppTest {
 
     @Test
+    fun `test main class exists`() {
+        val mainClass = Main::class.java
+        assertNotNull(mainClass)
+    }
+
+    @Test
     fun `test app class exists`() {
         val appClass = App::class.java
         assertNotNull(appClass)
     }
 
     @Test
-    fun `test launcher class exists`() {
-        val launcherClass = LauncherApp::class.java
-        assertNotNull(launcherClass)
-    }
-
-    @Test
-    fun `test advanced demo class exists`() {
-        val advancedClass = AdvancedDemo::class.java
-        assertNotNull(advancedClass)
+    fun `test main method exists`() {
+        val mainMethod = Main::class.java.methods.find { it.name == "run" }
+        assertNotNull(mainMethod)
     }
 }
