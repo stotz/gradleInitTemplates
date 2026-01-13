@@ -1,5 +1,5 @@
 [versions]
-kotlin = "2.2.20"
+kotlin = "{{ kotlin_version }}"
 shadow = "9.3.1"
 ktor = "3.3.2"
 logback = "1.4.14"

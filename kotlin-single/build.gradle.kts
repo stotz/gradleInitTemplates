@@ -81,9 +81,9 @@ tasks.test {
 tasks.jar {
     manifest {
         attributes(
-            "Implementation-Title" to "{{ @@04|Your project name@@project_name }}",
+            "Implementation-Title" to "{{ project_name }}",
             "Implementation-Version" to version,
-            "Implementation-Vendor" to "{{ @@05|The vendor name@@vendor }}"
+            "Implementation-Vendor" to "{{ @@04|The vendor name={{ group }}@@vendor }}"
         )
     }
 }
