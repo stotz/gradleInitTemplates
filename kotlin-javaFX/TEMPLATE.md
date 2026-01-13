@@ -9,26 +9,6 @@ requirements:
   kotlin: ">=2.0"
   jdk: ">=21"
 
-raw_copy:
-  - dump_src.sh
-  - dump_src.cfg
-  - gradlew
-  - gradlew.bat
-
-subproject_mode:
-  skip:
-    - gradle/
-    - gradlew
-    - gradlew.bat
-    - settings.gradle.kts
-    - .gitignore
-    - .editorconfig
-    - dump_src.sh
-    - dump_src.cfg
-    - README.md
-  build_file: build.gradle.kts.subproject
-  merge_versions: gradle/libs.versions.toml
-
 arguments:
   - name: group
     type: string
@@ -124,7 +104,7 @@ The template uses these configuration values:
 - `version` - Project version (default: `1.0.0`)
 - `app_name` - Application name for display
 - `main_class` - Fully qualified main class name
-- `company` - Application company name
+- `vendor` - Application vendor name
 - `kotlin_version` - Kotlin version (from gradleInit defaults)
 - `jdk_version` - JDK version (default: 23, minimum 21)
 

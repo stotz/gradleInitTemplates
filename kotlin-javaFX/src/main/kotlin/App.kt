@@ -122,7 +122,7 @@ class App : Application() {
                                 Alert(Alert.AlertType.INFORMATION).apply {
                                     title = "About"
                                     headerText = "{{ app_name }}"
-                                    contentText = "Version {{ version }}\nBuilt with Kotlin {{ kotlin_version }}\n\n{{ company }}"
+                                    contentText = "Version {{ version }}\nBuilt with Kotlin {{ kotlin_version }}\n\n{{ vendor }}"
                                 }.showAndWait()
                             }
                         }

@@ -16,9 +16,8 @@ dependencies {
     testImplementation(kotlin("test"))
 }
 
-val jdkVersion = providers.gradleProperty("jdkVersion").get()
 kotlin {
-    jvmToolchain(jdkVersion.toInt())
+    jvmToolchain({{ @@03|(11|17|21)|JDK version=21@@jdk_version }})
 }
 
 val verboseTests = providers

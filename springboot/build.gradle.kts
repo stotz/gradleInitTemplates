@@ -3,6 +3,7 @@ import org.gradle.api.tasks.testing.logging.TestExceptionFormat
 plugins {
     alias(libs.plugins.kotlin.jvm)
     alias(libs.plugins.kotlin.spring)
+    alias(libs.plugins.shadow)
     alias(libs.plugins.spring.boot)
     alias(libs.plugins.spring.dependency.management)
 }
@@ -22,14 +23,13 @@ dependencies {
     testImplementation(libs.spring.boot.starter.test)
 }
 
-val jdkVersion = libs.versions.jdk.get()
 kotlin {
-    jvmToolchain(jdkVersion.toInt())
+    jvmToolchain({{ @@03|(11|17|21)|JDK version=21@@jdk_version }})
 }
 
 java {
     toolchain {
-        languageVersion = JavaLanguageVersion.of(jdkVersion)
+        languageVersion = JavaLanguageVersion.of({{ jdk_version }})
     }
 }
 

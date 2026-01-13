@@ -3,6 +3,7 @@ import org.gradle.api.tasks.testing.logging.TestExceptionFormat
 plugins {
     alias(libs.plugins.kotlin.jvm)
     alias(libs.plugins.kotlin.serialization)
+    alias(libs.plugins.shadow)
     alias(libs.plugins.ktor)
 }
 
@@ -14,12 +15,11 @@ repositories {
 }
 
 application {
-    mainClass = "{{ group }}.ApplicationKt"
+    mainClass = "io.ktor.server.netty.EngineMain"
 }
 
-val jdkVersion = libs.versions.jdk.get()
 kotlin {
-    jvmToolchain(jdkVersion.toInt())
+    jvmToolchain({{ @@03|(11|17|21)|JDK version=21@@jdk_version }})
 }
 
 dependencies {

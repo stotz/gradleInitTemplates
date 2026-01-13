@@ -8,7 +8,7 @@ A modern JavaFX desktop application built with Kotlin.
 - **Version**: {{ version }}
 - **Kotlin**: {{ kotlin_version }}
 - **JDK**: {{ jdk_version }}
-- **Company**: {{ company }}
+- **Vendor**: {{ vendor }}
 
 ## Features
 
@@ -28,18 +28,15 @@ A modern JavaFX desktop application built with Kotlin.
 
 ### Build and Run
 
-```shell
+```bash
 # Build the project
-./gradlew clean build
+./gradlew build
 
 # Run the application
 ./gradlew run
 
 # Run tests
-./gradlew clean test --rerun-tasks
-
-# Run tests with verbose output
-./gradlew clean test --rerun-tasks -PverboseTests=true
+./gradlew test
 ```
 
 ### Create Native Package
@@ -212,4 +209,4 @@ dependencies {
 
 ## License
 
-{{ company }}
+{{ vendor }}

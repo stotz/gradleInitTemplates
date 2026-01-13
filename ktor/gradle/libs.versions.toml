@@ -1,8 +1,8 @@
 [versions]
-jdk = "{{ @@03|(11|17|21|23)|JDK version=21@@jdk_version }}"
-kotlin = "2.2.21"
-ktor = "3.3.3"
-logback = "1.5.21"
+kotlin = "2.2.20"
+shadow = "9.3.1"
+ktor = "3.3.2"
+logback = "1.4.14"
 
 [libraries]
 ktor-server-core-jvm = { module = "io.ktor:ktor-server-core-jvm" }
@@ -18,4 +18,5 @@ kotlin-test-junit = { module = "org.jetbrains.kotlin:kotlin-test-junit", version
 [plugins]
 kotlin-jvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlin" }
 kotlin-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin" }
+shadow = { id = "com.gradleup.shadow", version.ref = "shadow" }
 ktor = { id = "io.ktor.plugin", version.ref = "ktor" }

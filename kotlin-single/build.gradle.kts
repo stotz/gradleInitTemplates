@@ -2,6 +2,7 @@ import org.gradle.api.tasks.testing.logging.TestExceptionFormat
 
 plugins {
     alias(libs.plugins.kotlin.jvm)
+    alias(libs.plugins.shadow)
     application
 }
 
@@ -22,14 +23,13 @@ dependencies {
     testImplementation(libs.mockk)
 }
 
-val jdkVersion = libs.versions.jdk.get()
 kotlin {
-    jvmToolchain(jdkVersion.toInt())
+    jvmToolchain({{ @@03|(11|17|21)|JDK version=21@@jdk_version }})
 }
 
 java {
     toolchain {
-        languageVersion = JavaLanguageVersion.of(jdkVersion)
+        languageVersion = JavaLanguageVersion.of({{ jdk_version }})
     }
 }
 
@@ -83,7 +83,7 @@ tasks.jar {
         attributes(
             "Implementation-Title" to "{{ @@04|Your project name@@project_name }}",
             "Implementation-Version" to version,
-            "Implementation-Vendor" to "{{ @@05|The Company or author name@@company }}"
+            "Implementation-Vendor" to "{{ @@05|The vendor name@@vendor }}"
         )
     }
 }
