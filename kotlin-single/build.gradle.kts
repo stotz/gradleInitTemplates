@@ -83,7 +83,7 @@ tasks.jar {
         attributes(
             "Implementation-Title" to "{{ project_name }}",
             "Implementation-Version" to version,
-            "Implementation-Vendor" to "{{ @@04|The vendor name={{ group }}@@vendor }}"
+            "Implementation-Vendor" to "{{ group }}"
         )
     }
 }
