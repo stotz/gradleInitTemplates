@@ -1,4 +1,5 @@
 import org.gradle.api.tasks.testing.logging.TestExceptionFormat
+import java.time.Instant
 
 plugins {
     alias(libs.plugins.kotlin.jvm)
@@ -24,12 +25,12 @@ dependencies {
 }
 
 kotlin {
-    jvmToolchain({{ @@03|(11|17|21)|JDK version=21@@jdk_version }})
+    jvmToolchain(libs.versions.jdk.get().toInt())
 }
 
 java {
     toolchain {
-        languageVersion = JavaLanguageVersion.of({{ jdk_version }})
+        languageVersion = JavaLanguageVersion.of(libs.versions.jdk.get())
     }
 }
 
@@ -78,12 +79,50 @@ tasks.test {
     })
 }
 
+// ============================================================================
+// Git Information (optional, enable with -PenableGitInfo=true)
+// ============================================================================
+val enableGitInfo = providers
+    .gradleProperty("enableGitInfo")
+    .map { it.toBoolean() }
+    .orElse(false)
+
+fun getGitCommit(): String = try {
+    val process = ProcessBuilder("git", "rev-parse", "--short", "HEAD")
+        .redirectOutput(ProcessBuilder.Redirect.PIPE)
+        .redirectError(ProcessBuilder.Redirect.PIPE)
+        .start()
+    process.inputStream.bufferedReader().readText().trim().ifEmpty { "unknown" }
+} catch (e: Exception) {
+    "unknown"
+}
+
+fun getGitBranch(): String = try {
+    val process = ProcessBuilder("git", "rev-parse", "--abbrev-ref", "HEAD")
+        .redirectOutput(ProcessBuilder.Redirect.PIPE)
+        .redirectError(ProcessBuilder.Redirect.PIPE)
+        .start()
+    process.inputStream.bufferedReader().readText().trim().ifEmpty { "unknown" }
+} catch (e: Exception) {
+    "unknown"
+}
+
 tasks.jar {
     manifest {
-        attributes(
+        val baseAttributes = mutableMapOf(
             "Implementation-Title" to "{{ project_name }}",
-            "Implementation-Version" to version,
+            "Implementation-Version" to version.toString(),
             "Implementation-Vendor" to "{{ group }}"
         )
+
+        if (enableGitInfo.get()) {
+            baseAttributes["Git-Commit"] = getGitCommit()
+            baseAttributes["Git-Branch"] = getGitBranch()
+            baseAttributes["Build-Time"] = Instant.now().toString()
+            baseAttributes["Built-By"] = System.getProperty("user.name")
+            baseAttributes["Build-Jdk"] = System.getProperty("java.version")
+        }
+
+        attributes(baseAttributes)
     }
 }

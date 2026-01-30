@@ -32,13 +32,21 @@ USAGE:
   ./dump_src.sh
   ./dump_src.sh --dry-run
   ./dump_src.sh --help
+  ./dump_src.sh --help_git_rev
 
 OPTIONS:
   --help, -h
         Shows this help text.
 
+  ./dump_src.sh
+        Only git-tracked files are included by default (without dump_src.cfg)
+
   --dry-run
         Shows what would be archived, but does NOT create an archive.
+
+  --help_git_rev
+        Shows documentation for archiving a historical git revision.
+        No repository state is modified.
 
 CONFIG FILE (dump_src.cfg):
   This file is optional and may contain three variables:
@@ -70,11 +78,11 @@ CONFIG FILE (dump_src.cfg):
 
 FULL EXAMPLE (dump_src.cfg):
 
-  basename="swekt"
+  basename="project_name"
 
+  # additional
   file_list=(
-    swe_test.py
-    local_settings.json
+    docs/TODO.md
   )
 
   ignore_list=(
@@ -93,12 +101,45 @@ NOTES:
 EOF
 }
 
+help_git_rev() {
+  cat <<EOF
+dump_src.sh always works on the currently checked-out repository state.
+It never modifies the repository (no checkout, no reset, no worktree).
+
+If you need an archive of a historical git revision, prepare that revision
+outside of your working repository and run dump_src.sh there.
+
+Recommended procedure:
+
+1. Create a temporary directory
+2. Check out the desired commit, tag, or branch in that directory
+3. Run dump_src.sh in that directory
+
+Example:
+
+mkdir tmp_git_rev
+cd tmp_git_rev
+
+git clone <repository-url> .
+git checkout <commit|tag|branch>
+
+./dump_src.sh
+
+This keeps the working repository untouched and avoids any risk of
+accidentally modifying your current work state.
+EOF
+}
+
 # Handle command-line options
 dry_run=false
 if [[ $# -gt 0 ]]; then
   case "$1" in
     --help|-h|help)
       show_help
+      exit 0
+      ;;
+    --help_git_rev)
+      help_git_rev
       exit 0
       ;;
     --dry-run)
@@ -290,9 +331,10 @@ rm -f "$tmpfile"
 # 7. Summary
 # ------------------------------------------------------------------------------
 section "Summary"
-
+sha256=$(sha256sum "$basename.tar.bz2" | awk '{print $1}')
 printf "%s%s\n" "Project: " "$project"
-printf "%s%s\n" "Archive: " "$archive_path"
+printf "%s%s\n" "Archive: " "$basename.tar.bz2"
+printf "%s%s\n" "sha256:  " "$sha256"
 echo
 
 printf "Tracked git files:       %d\n" "$git_files_count"

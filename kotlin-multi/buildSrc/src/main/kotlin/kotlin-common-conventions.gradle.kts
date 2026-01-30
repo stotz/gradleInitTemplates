@@ -1,4 +1,5 @@
 import org.gradle.api.tasks.testing.logging.TestExceptionFormat
+import java.time.Instant
 
 plugins {
     kotlin("jvm")
@@ -59,4 +60,51 @@ tasks.test {
         override fun beforeTest(desc: TestDescriptor) {}
         override fun afterTest(desc: TestDescriptor, result: TestResult) {}
     })
+}
+
+// ============================================================================
+// Git Information (optional, enable with -PenableGitInfo=true)
+// ============================================================================
+val enableGitInfo = providers
+    .gradleProperty("enableGitInfo")
+    .map { it.toBoolean() }
+    .orElse(false)
+
+fun getGitCommit(): String = try {
+    val process = ProcessBuilder("git", "rev-parse", "--short", "HEAD")
+        .redirectOutput(ProcessBuilder.Redirect.PIPE)
+        .redirectError(ProcessBuilder.Redirect.PIPE)
+        .start()
+    process.inputStream.bufferedReader().readText().trim().ifEmpty { "unknown" }
+} catch (e: Exception) {
+    "unknown"
+}
+
+fun getGitBranch(): String = try {
+    val process = ProcessBuilder("git", "rev-parse", "--abbrev-ref", "HEAD")
+        .redirectOutput(ProcessBuilder.Redirect.PIPE)
+        .redirectError(ProcessBuilder.Redirect.PIPE)
+        .start()
+    process.inputStream.bufferedReader().readText().trim().ifEmpty { "unknown" }
+} catch (e: Exception) {
+    "unknown"
+}
+
+tasks.withType<Jar>().configureEach {
+    manifest {
+        val baseAttributes = mutableMapOf(
+            "Implementation-Title" to project.name,
+            "Implementation-Version" to version.toString()
+        )
+
+        if (enableGitInfo.get()) {
+            baseAttributes["Git-Commit"] = getGitCommit()
+            baseAttributes["Git-Branch"] = getGitBranch()
+            baseAttributes["Build-Time"] = Instant.now().toString()
+            baseAttributes["Built-By"] = System.getProperty("user.name")
+            baseAttributes["Build-Jdk"] = System.getProperty("java.version")
+        }
+
+        attributes(baseAttributes)
+    }
 }
