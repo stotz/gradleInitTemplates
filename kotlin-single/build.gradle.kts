@@ -16,6 +16,12 @@ repositories {
 
 dependencies {
     implementation(kotlin("stdlib"))
+{% if enable_clikt %}
+
+    // CLI framework
+    implementation(libs.clikt)
+    implementation(libs.clikt.markdown)
+{% endif %}
 
     // Testing
     testImplementation(kotlin("test"))

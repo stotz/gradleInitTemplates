@@ -1,8 +1,8 @@
 ---
 name: Kotlin Single Project
 description: Simple single-module Kotlin project with Gradle Kotlin DSL
-version: 1.0.0
-tags: [kotlin, gradle, simple, single-module]
+version: 1.1.0
+tags: [kotlin, gradle, simple, single-module, cli]
 
 requirements:
   gradle: ">=8.0"
@@ -23,6 +23,13 @@ arguments:
     context_key: version
     default: "1.0.0"
     required: false
+
+  - name: enable_clikt
+    type: boolean
+    help: Enable Clikt CLI framework with Markdown help rendering
+    context_key: enable_clikt
+    default: false
+    required: false
 ---
 
 # Kotlin Single Project Template
@@ -35,6 +42,9 @@ A simple single-module Kotlin project with modern Gradle Kotlin DSL configuratio
 - **Version Catalog** - Centralized dependency management via `gradle/libs.versions.toml`
 - **JDK Toolchain** - Ensures consistent Java version across environments
 - **JUnit 5** - Modern testing framework
+- **CLI Support** - Built-in `--help` and `--info` commands
+- **Optional Clikt** - Full CLI framework with Markdown help rendering
+- **Git Info** - Optional build metadata in JAR manifest
 - **EditorConfig** - Consistent code formatting
 - **Git ready** - Complete `.gitignore` configuration
 
@@ -74,9 +84,42 @@ cd my-project
 # Run the application
 ./gradlew run
 
+# Run with arguments
+./gradlew run --args="--help"
+./gradlew run --args="info"
+./gradlew run --args="info --verbose"
+
 # Run tests
 ./gradlew test
 ```
+
+## CLI Options
+
+The generated application supports:
+
+```bash
+# Show help
+myapp --help
+
+# Show version and build info
+myapp info
+myapp info --verbose    # Show all manifest attributes
+
+# With Clikt enabled: additional options
+myapp --name "World" --count 3
+```
+
+## Build with Git Info
+
+To include Git and build information in the JAR manifest:
+
+```bash
+./gradlew jar -PenableGitInfo=true
+```
+
+This adds to the manifest:
+- Git-Commit, Git-Branch, Git-Tag, Git-Dirty
+- Build-Time, Build-OS, Build-Host, Build-Jdk, Built-By
 
 ## Configuration
 
@@ -84,9 +127,21 @@ The template uses these configuration values:
 
 - `group` - Your Maven group ID (e.g., `com.mycompany`)
 - `version` - Project version (default: `1.0.0`)
+- `enable_clikt` - Enable Clikt CLI framework (default: `false`)
 - `kotlin_version` - Kotlin version (from gradleInit defaults)
 - `gradle_version` - Gradle version (from gradleInit defaults)
 - `jdk_version` - JDK version (default: 21)
+
+### Enable Clikt CLI Framework
+
+```bash
+gradleInit init myapp --template kotlin-single --config enable_clikt=true
+```
+
+This enables:
+- Clikt CLI framework with subcommands
+- Markdown-rendered help messages
+- Option parsing with defaults
 
 ### Custom Configuration
 
