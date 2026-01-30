@@ -107,6 +107,27 @@ fun getGitBranch(): String = try {
     "unknown"
 }
 
+fun getGitTag(): String = try {
+    val process = ProcessBuilder("git", "describe", "--tags", "--exact-match")
+        .redirectOutput(ProcessBuilder.Redirect.PIPE)
+        .redirectError(ProcessBuilder.Redirect.PIPE)
+        .start()
+    val result = process.inputStream.bufferedReader().readText().trim()
+    if (process.waitFor() == 0 && result.isNotEmpty()) result else "none"
+} catch (e: Exception) {
+    "none"
+}
+
+fun getGitDirty(): String = try {
+    val process = ProcessBuilder("git", "status", "--porcelain")
+        .redirectOutput(ProcessBuilder.Redirect.PIPE)
+        .redirectError(ProcessBuilder.Redirect.PIPE)
+        .start()
+    if (process.inputStream.bufferedReader().readText().trim().isEmpty()) "false" else "true"
+} catch (e: Exception) {
+    "unknown"
+}
+
 tasks.jar {
     manifest {
         val baseAttributes = mutableMapOf(
@@ -118,9 +139,13 @@ tasks.jar {
         if (enableGitInfo.get()) {
             baseAttributes["Git-Commit"] = getGitCommit()
             baseAttributes["Git-Branch"] = getGitBranch()
+            baseAttributes["Git-Tag"] = getGitTag()
+            baseAttributes["Git-Dirty"] = getGitDirty()
             baseAttributes["Build-Time"] = Instant.now().toString()
-            baseAttributes["Built-By"] = System.getProperty("user.name")
+            baseAttributes["Build-OS"] = "${System.getProperty("os.name")} ${System.getProperty("os.version")}"
+            baseAttributes["Build-Host"] = java.net.InetAddress.getLocalHost().hostName
             baseAttributes["Build-Jdk"] = System.getProperty("java.version")
+            baseAttributes["Built-By"] = System.getProperty("user.name")
         }
 
         attributes(baseAttributes)
