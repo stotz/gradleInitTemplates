@@ -5,49 +5,36 @@ import com.github.ajalt.clikt.core.CliktCommand
 import com.github.ajalt.clikt.core.Context
 import com.github.ajalt.clikt.core.main
 import com.github.ajalt.clikt.core.subcommands
+import com.github.ajalt.clikt.parameters.options.default
 import com.github.ajalt.clikt.parameters.options.flag
 import com.github.ajalt.clikt.parameters.options.option
-import com.github.ajalt.clikt.parameters.options.default
+import com.github.ajalt.clikt.parameters.types.int
 
 /**
  * Main entry point for {{ project_name }}
  *
  * A CLI application built with Clikt.
  */
-fun main(args: Array<String>) = App().subcommands(InfoCommand()).main(args)
+fun main(args: Array<String>) = App()
+    .subcommands(InfoCommand())
+    .main(args)
 
 /**
  * Main application command.
- *
- * Usage:
- * ```
- * {{ project_name }} [OPTIONS] [COMMAND]
- * {{ project_name }} --help
- * {{ project_name }} info
- * ```
  */
 class App : CliktCommand(name = "{{ project_name }}") {
 
     override fun help(context: Context): String = """
-        **{{ project_name }}** - A Kotlin CLI application.
+        {{ project_name }} - A Kotlin CLI application.
         
-        Use `--help` on any command for more information.
-        
-        ## Examples
-        
-        ```
-        {{ project_name }} --help
-        {{ project_name }} info
-        {{ project_name }} info --verbose
-        ```
+        Use --help on any command for more information.
     """.trimIndent()
 
-    private val name by option("-n", "--name").help("Name to greet").default("World")
-    private val count by option("-c", "--count").help("Number of greetings").default("1")
+    private val name by option("-n", "--name", help = "Name to greet").default("World")
+    private val count by option("-c", "--count", help = "Number of greetings").int().default(1)
 
     override fun run() {
-        val times = count.toIntOrNull() ?: 1
-        repeat(times) {
+        repeat(count) {
             echo("Hello, $name!")
         }
     }
@@ -60,7 +47,7 @@ class InfoCommand : CliktCommand(name = "info") {
 
     override fun help(context: Context): String = "Display build and version information"
 
-    private val verbose by option("-v", "--verbose").help("Show all manifest attributes").flag()
+    private val verbose by option("-v", "--verbose", help = "Show all manifest attributes").flag()
 
     override fun run() {
         val manifest = loadManifest()
