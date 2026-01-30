@@ -2,6 +2,7 @@ package {{ group }}
 {% if enable_clikt %}
 
 import com.github.ajalt.clikt.core.CliktCommand
+import com.github.ajalt.clikt.core.Context
 import com.github.ajalt.clikt.core.main
 import com.github.ajalt.clikt.core.subcommands
 import com.github.ajalt.clikt.parameters.options.flag
@@ -25,9 +26,9 @@ fun main(args: Array<String>) = App().subcommands(InfoCommand()).main(args)
  * {{ project_name }} info
  * ```
  */
-class App : CliktCommand(
-    name = "{{ project_name }}",
-    help = """
+class App : CliktCommand(name = "{{ project_name }}") {
+
+    override fun help(context: Context): String = """
         **{{ project_name }}** - A Kotlin CLI application.
         
         Use `--help` on any command for more information.
@@ -40,9 +41,9 @@ class App : CliktCommand(
         {{ project_name }} info --verbose
         ```
     """.trimIndent()
-) {
-    private val name by option("-n", "--name", help = "Name to greet").default("World")
-    private val count by option("-c", "--count", help = "Number of greetings").default("1")
+
+    private val name by option("-n", "--name").help("Name to greet").default("World")
+    private val count by option("-c", "--count").help("Number of greetings").default("1")
 
     override fun run() {
         val times = count.toIntOrNull() ?: 1
@@ -55,11 +56,11 @@ class App : CliktCommand(
 /**
  * Info subcommand - displays build and version information.
  */
-class InfoCommand : CliktCommand(
-    name = "info",
-    help = "Display build and version information"
-) {
-    private val verbose by option("-v", "--verbose", help = "Show all manifest attributes").flag()
+class InfoCommand : CliktCommand(name = "info") {
+
+    override fun help(context: Context): String = "Display build and version information"
+
+    private val verbose by option("-v", "--verbose").help("Show all manifest attributes").flag()
 
     override fun run() {
         val manifest = loadManifest()
