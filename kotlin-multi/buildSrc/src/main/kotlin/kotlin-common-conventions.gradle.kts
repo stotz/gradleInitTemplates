@@ -1,4 +1,5 @@
 import org.gradle.api.tasks.testing.logging.TestExceptionFormat
+import java.net.InetAddress
 import java.time.Instant
 
 plugins {
@@ -125,7 +126,7 @@ tasks.withType<Jar>().configureEach {
             baseAttributes["Git-Dirty"] = getGitDirty()
             baseAttributes["Build-Time"] = Instant.now().toString()
             baseAttributes["Build-OS"] = "${System.getProperty("os.name")} ${System.getProperty("os.version")}"
-            baseAttributes["Build-Host"] = java.net.InetAddress.getLocalHost().hostName
+            baseAttributes["Build-Host"] = InetAddress.getLocalHost().hostName
             baseAttributes["Build-Jdk"] = System.getProperty("java.version")
             baseAttributes["Built-By"] = System.getProperty("user.name")
         }
