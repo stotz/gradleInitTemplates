@@ -19,6 +19,8 @@
 - [API Endpoints](#-api-endpoints)
 - [Project Structure](#-project-structure)
 - [Push to GitHub](#-push-to-github)
+- [Resources](#-resources)
+- [Version](#-version)
 
 ---
 
@@ -152,6 +154,15 @@ git status        # Should be clean
 git log --oneline # Should show initial commit
 git ls-files      # Show all tracked files
 ```
+
+---
+
+## 📚 Resources
+
+- [Ktor Documentation](https://ktor.io/docs/)
+- [Kotlin Documentation](https://kotlinlang.org/docs/)
+- [Gradle Documentation](https://docs.gradle.org/)
+- [Ktor Samples](https://github.com/ktorio/ktor-samples)
 
 ---
 

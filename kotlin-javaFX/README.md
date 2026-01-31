@@ -23,6 +23,7 @@
 - [Troubleshooting](#-troubleshooting)
 - [Push to GitHub](#-push-to-github)
 - [Resources](#-resources)
+- [License](#-license)
 
 ---
 

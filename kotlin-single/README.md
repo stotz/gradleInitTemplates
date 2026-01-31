@@ -18,6 +18,8 @@
 - [Run](#-run)
 - [Project Structure](#-project-structure)
 - [Push to GitHub](#-push-to-github)
+- [Resources](#-resources)
+- [License](#-license)
 
 ---
 
@@ -152,6 +154,16 @@ git status        # Should be clean
 git log --oneline # Should show initial commit
 git ls-files      # Show all tracked files
 ```
+
+---
+
+## 📚 Resources
+
+- [Kotlin Documentation](https://kotlinlang.org/docs/)
+- [Gradle Documentation](https://docs.gradle.org/)
+- [Shadow Plugin](https://github.com/johnrengelman/shadow)
+{% if enable_clikt %}- [Clikt Documentation](https://ajalt.github.io/clikt/)
+- [Mordant Terminal](https://github.com/ajalt/mordant){% endif %}
 
 ---
 

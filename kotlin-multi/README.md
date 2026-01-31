@@ -18,6 +18,8 @@
 - [Project Structure](#-project-structure)
 - [Modules](#-modules)
 - [Push to GitHub](#-push-to-github)
+- [Resources](#-resources)
+- [License](#-license)
 
 ---
 
@@ -154,6 +156,15 @@ git status        # Should be clean
 git log --oneline # Should show initial commit
 git ls-files      # Show all tracked files
 ```
+
+---
+
+## 📚 Resources
+
+- [Kotlin Documentation](https://kotlinlang.org/docs/)
+- [Gradle Documentation](https://docs.gradle.org/)
+- [Gradle Multi-Project Builds](https://docs.gradle.org/current/userguide/multi_project_builds.html)
+- [Convention Plugins](https://docs.gradle.org/current/userguide/sharing_build_logic_between_subprojects.html)
 
 ---
 

@@ -20,6 +20,8 @@
 - [Configuration](#-configuration)
 - [Project Structure](#-project-structure)
 - [Push to GitHub](#-push-to-github)
+- [Resources](#-resources)
+- [License](#-license)
 
 ---
 
@@ -159,6 +161,15 @@ git status        # Should be clean
 git log --oneline # Should show initial commit
 git ls-files      # Show all tracked files
 ```
+
+---
+
+## 📚 Resources
+
+- [Spring Boot Documentation](https://docs.spring.io/spring-boot/docs/current/reference/html/)
+- [Spring Guides](https://spring.io/guides)
+- [Kotlin Documentation](https://kotlinlang.org/docs/)
+- [Gradle Documentation](https://docs.gradle.org/)
 
 ---
 
