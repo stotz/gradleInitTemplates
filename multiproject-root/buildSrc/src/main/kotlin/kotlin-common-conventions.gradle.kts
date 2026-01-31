@@ -64,72 +64,50 @@ tasks.test {
 
 // ============================================================================
 // Git Information (optional, enable with -PenableGitInfo=true)
+// Configuration Cache compatible using Provider API
 // ============================================================================
-val enableGitInfo = providers
+val enableGitInfo: Provider<Boolean> = providers
     .gradleProperty("enableGitInfo")
     .map { it.toBoolean() }
     .orElse(false)
 
-fun getGitCommit(): String = try {
-    val process = ProcessBuilder("git", "rev-parse", "--short", "HEAD")
-        .redirectOutput(ProcessBuilder.Redirect.PIPE)
-        .redirectError(ProcessBuilder.Redirect.PIPE)
-        .start()
-    process.inputStream.bufferedReader().readText().trim().ifEmpty { "unknown" }
-} catch (e: Exception) {
-    "unknown"
-}
+// Use providers to get git info at execution time (Configuration Cache compatible)
+val gitCommit: Provider<String> = providers.exec {
+    commandLine("git", "rev-parse", "--short", "HEAD")
+}.standardOutput.asText.map { it.trim().ifEmpty { "unknown" } }
 
-fun getGitBranch(): String = try {
-    val process = ProcessBuilder("git", "rev-parse", "--abbrev-ref", "HEAD")
-        .redirectOutput(ProcessBuilder.Redirect.PIPE)
-        .redirectError(ProcessBuilder.Redirect.PIPE)
-        .start()
-    process.inputStream.bufferedReader().readText().trim().ifEmpty { "unknown" }
-} catch (e: Exception) {
-    "unknown"
-}
+val gitBranch: Provider<String> = providers.exec {
+    commandLine("git", "rev-parse", "--abbrev-ref", "HEAD")
+}.standardOutput.asText.map { it.trim().ifEmpty { "unknown" } }
 
-fun getGitTag(): String = try {
-    val process = ProcessBuilder("git", "describe", "--tags", "--exact-match")
-        .redirectOutput(ProcessBuilder.Redirect.PIPE)
-        .redirectError(ProcessBuilder.Redirect.PIPE)
-        .start()
-    val result = process.inputStream.bufferedReader().readText().trim()
-    if (process.waitFor() == 0 && result.isNotEmpty()) result else "none"
-} catch (e: Exception) {
-    "none"
-}
+val gitTag: Provider<String> = providers.exec {
+    commandLine("git", "describe", "--tags", "--exact-match")
+    isIgnoreExitValue = true
+}.standardOutput.asText.map { it.trim().ifEmpty { "none" } }
 
-fun getGitDirty(): String = try {
-    val process = ProcessBuilder("git", "status", "--porcelain")
-        .redirectOutput(ProcessBuilder.Redirect.PIPE)
-        .redirectError(ProcessBuilder.Redirect.PIPE)
-        .start()
-    if (process.inputStream.bufferedReader().readText().trim().isEmpty()) "false" else "true"
-} catch (e: Exception) {
-    "unknown"
-}
+val gitDirty: Provider<String> = providers.exec {
+    commandLine("git", "status", "--porcelain")
+}.standardOutput.asText.map { if (it.trim().isEmpty()) "false" else "true" }
 
 tasks.withType<Jar>().configureEach {
     manifest {
-        val baseAttributes = mutableMapOf(
+        attributes(
             "Implementation-Title" to project.name,
             "Implementation-Version" to version.toString()
         )
-
+        
         if (enableGitInfo.get()) {
-            baseAttributes["Git-Commit"] = getGitCommit()
-            baseAttributes["Git-Branch"] = getGitBranch()
-            baseAttributes["Git-Tag"] = getGitTag()
-            baseAttributes["Git-Dirty"] = getGitDirty()
-            baseAttributes["Build-Time"] = Instant.now().toString()
-            baseAttributes["Build-OS"] = "${System.getProperty("os.name")} ${System.getProperty("os.version")}"
-            baseAttributes["Build-Host"] = InetAddress.getLocalHost().hostName
-            baseAttributes["Build-Jdk"] = System.getProperty("java.version")
-            baseAttributes["Built-By"] = System.getProperty("user.name")
+            attributes(
+                "Git-Commit" to gitCommit.get(),
+                "Git-Branch" to gitBranch.get(),
+                "Git-Tag" to gitTag.get(),
+                "Git-Dirty" to gitDirty.get(),
+                "Build-Time" to Instant.now().toString(),
+                "Build-OS" to "${System.getProperty("os.name")} ${System.getProperty("os.version")}",
+                "Build-Host" to InetAddress.getLocalHost().hostName,
+                "Build-Jdk" to System.getProperty("java.version"),
+                "Built-By" to System.getProperty("user.name")
+            )
         }
-
-        attributes(baseAttributes)
     }
 }

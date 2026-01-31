@@ -24,6 +24,9 @@ fun main(args: Array<String>) = App()
  */
 class App : CliktCommand(name = "{{ project_name }}") {
 
+    // Allow running without subcommand
+    override val invokeWithoutSubcommand = true
+
     override fun help(context: Context): String = """
         {{ project_name }} - A Kotlin CLI application.
         
@@ -34,8 +37,11 @@ class App : CliktCommand(name = "{{ project_name }}") {
     private val count by option("-c", "--count", help = "Number of greetings").int().default(1)
 
     override fun run() {
-        repeat(count) {
-            echo("Hello, $name!")
+        // Only run if no subcommand was invoked
+        if (currentContext.invokedSubcommand == null) {
+            repeat(count) {
+                echo("Hello, $name!")
+            }
         }
     }
 }
