@@ -1,13 +1,32 @@
 # {{ project_name }}
 
-A multi-module Kotlin project generated with gradleInit.
+[![Kotlin](https://img.shields.io/badge/Kotlin-{{ kotlin_version }}-7F52FF.svg?logo=kotlin)](https://kotlinlang.org)
+[![Gradle](https://img.shields.io/badge/Gradle-9.x-02303A.svg?logo=gradle)](https://gradle.org)
+[![JDK](https://img.shields.io/badge/JDK-{{ jdk_version }}-ED8B00.svg?logo=openjdk)](https://openjdk.org)
+[![License](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 
-## Prerequisites
+> A multi-module Kotlin project generated with [gradleInit](https://github.com/anthropics/gradleInit).
+
+---
+
+## 📋 Table of Contents
+
+- [Prerequisites](#-prerequisites)
+- [Build](#-build)
+- [Test](#-test)
+- [Project Structure](#-project-structure)
+- [Adding Subprojects](#-adding-subprojects)
+- [Convention Plugins](#-convention-plugins)
+- [Push to GitHub](#-push-to-github)
+
+---
+
+## 🔧 Prerequisites
 
 - JDK {{ jdk_version }} or higher
 - Gradle (wrapper included)
 
-## Build
+## 🏗️ Build
 
 ```shell
 ./gradlew clean build
@@ -19,7 +38,7 @@ Build with Git information in JAR manifest:
 ./gradlew clean build -PenableGitInfo=true
 ```
 
-## Test
+## 🧪 Test
 
 ```shell
 ./gradlew clean test --rerun-tasks
@@ -31,7 +50,7 @@ Verbose test output:
 ./gradlew clean test --rerun-tasks -PverboseTests=true
 ```
 
-## Project Structure
+## 📁 Project Structure
 
 ```
 {{ project_name }}/
@@ -44,7 +63,7 @@ Verbose test output:
       kotlin-common-conventions.gradle.kts
 ```
 
-## Adding Subprojects
+## ➕ Adding Subprojects
 
 Use gradleInit to add subprojects:
 
@@ -60,7 +79,7 @@ Each subproject will:
 - Have dependencies merged into libs.versions.toml
 - Be added to settings.gradle.kts
 
-## Convention Plugins
+## 🔌 Convention Plugins
 
 All subprojects should apply the common conventions:
 
@@ -70,7 +89,9 @@ plugins {
 }
 ```
 
-## Push to GitHub
+---
+
+## 🚀 Push to GitHub
 
 Your project is ready to push to GitHub!
 
@@ -118,7 +139,7 @@ git branch -M main
 git push -u origin main
 ```
 
-> **Tip:** SSH Setup: https://docs.github.com/en/authentication/connecting-to-github-with-ssh
+> **💡 Tip:** SSH Setup: https://docs.github.com/en/authentication/connecting-to-github-with-ssh
 
 Verify committed files:
 
@@ -128,6 +149,8 @@ git log --oneline # Should show initial commit
 git ls-files      # Show all tracked files
 ```
 
-## Version
+---
+
+## 📄 Version
 
 {{ group }}:{{ project_name }}:{{ version }}

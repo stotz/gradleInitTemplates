@@ -1,8 +1,32 @@
 # {{ app_name }}
 
-A modern JavaFX desktop application built with Kotlin.
+[![Kotlin](https://img.shields.io/badge/Kotlin-{{ kotlin_version }}-7F52FF.svg?logo=kotlin)](https://kotlinlang.org)
+[![JavaFX](https://img.shields.io/badge/JavaFX-{{ javafx_version }}-007396.svg?logo=java)](https://openjfx.io)
+[![Gradle](https://img.shields.io/badge/Gradle-9.x-02303A.svg?logo=gradle)](https://gradle.org)
+[![JDK](https://img.shields.io/badge/JDK-{{ jdk_version }}-ED8B00.svg?logo=openjdk)](https://openjdk.org)
+[![License](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 
-## Project Information
+> A modern JavaFX desktop application built with Kotlin, generated with [gradleInit](https://github.com/anthropics/gradleInit).
+
+---
+
+## 📋 Table of Contents
+
+- [Project Information](#-project-information)
+- [Features](#-features)
+- [Quick Start](#-quick-start)
+- [Project Structure](#-project-structure)
+- [Dependencies](#-dependencies)
+- [Development](#-development)
+- [Configuration](#-configuration)
+- [Testing](#-testing)
+- [Troubleshooting](#-troubleshooting)
+- [Push to GitHub](#-push-to-github)
+- [Resources](#-resources)
+
+---
+
+## 📊 Project Information
 
 - **Group**: {{ group }}
 - **Version**: {{ version }}
@@ -10,7 +34,7 @@ A modern JavaFX desktop application built with Kotlin.
 - **JDK**: {{ jdk_version }}
 - **Vendor**: {{ vendor }}
 
-## Features
+## ✨ Features
 
 - **JavaFX 25** - Modern desktop UI framework
 - **Ikonli** - Icon library with FontAwesome 5
@@ -19,7 +43,7 @@ A modern JavaFX desktop application built with Kotlin.
 - **ValidatorFX** - Input validation
 - **JLink** - Native packaging support
 
-## Quick Start
+## 🚀 Quick Start
 
 ### Prerequisites
 
@@ -54,7 +78,7 @@ A modern JavaFX desktop application built with Kotlin.
 # Runtime image location: build/image/
 ```
 
-## Project Structure
+## 📁 Project Structure
 
 ```
 {{ project_name }}/
@@ -71,7 +95,7 @@ A modern JavaFX desktop application built with Kotlin.
 └── README.md                 # This file
 ```
 
-## Dependencies
+## 📦 Dependencies
 
 ### JavaFX Modules
 - javafx-base
@@ -88,7 +112,7 @@ A modern JavaFX desktop application built with Kotlin.
 ### Build Tools
 - **Beryx JLink** (3.1.3) - Native packaging
 
-## Development
+## 💻 Development
 
 ### IDE Setup
 
@@ -127,7 +151,7 @@ dependencies {
 }
 ```
 
-## Configuration
+## ⚙️ Configuration
 
 ### JDK Version
 
@@ -154,7 +178,7 @@ Customize in `build.gradle.kts` `jlink` block for:
 - Launcher options
 - JVM arguments
 
-## Testing
+## 🧪 Testing
 
 The project uses JUnit 5 for testing.
 
@@ -177,7 +201,7 @@ dependencies {
 }
 ```
 
-## Troubleshooting
+## 🔧 Troubleshooting
 
 ### JavaFX Runtime Not Found
 
@@ -200,7 +224,7 @@ dependencies {
 ./gradlew clean build --refresh-dependencies
 ```
 
-## Resources
+## 📚 Resources
 
 - [JavaFX Documentation](https://openjfx.io/)
 - [Kotlin Documentation](https://kotlinlang.org/docs/)
@@ -210,7 +234,9 @@ dependencies {
 - [FormsFX](https://github.com/dlemmermann/FormsFX)
 - [ValidatorFX](https://github.com/effad/ValidatorFX)
 
-## Push to GitHub
+---
+
+## 🚀 Push to GitHub
 
 Your project is ready to push to GitHub!
 
@@ -258,7 +284,7 @@ git branch -M main
 git push -u origin main
 ```
 
-> **Tip:** SSH Setup: https://docs.github.com/en/authentication/connecting-to-github-with-ssh
+> **💡 Tip:** SSH Setup: https://docs.github.com/en/authentication/connecting-to-github-with-ssh
 
 Verify committed files:
 
@@ -268,6 +294,8 @@ git log --oneline # Should show initial commit
 git ls-files      # Show all tracked files
 ```
 
-## License
+---
+
+## 📄 License
 
 {{ vendor }}

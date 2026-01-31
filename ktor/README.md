@@ -1,13 +1,33 @@
 # {{ project_name }}
 
-A Ktor web application generated with gradleInit.
+[![Kotlin](https://img.shields.io/badge/Kotlin-{{ kotlin_version }}-7F52FF.svg?logo=kotlin)](https://kotlinlang.org)
+[![Ktor](https://img.shields.io/badge/Ktor-{{ ktor_version }}-087CFA.svg?logo=ktor)](https://ktor.io)
+[![Gradle](https://img.shields.io/badge/Gradle-9.x-02303A.svg?logo=gradle)](https://gradle.org)
+[![JDK](https://img.shields.io/badge/JDK-{{ jdk_version }}-ED8B00.svg?logo=openjdk)](https://openjdk.org)
+[![License](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 
-## Prerequisites
+> A Ktor web application generated with [gradleInit](https://github.com/anthropics/gradleInit).
+
+---
+
+## 📋 Table of Contents
+
+- [Prerequisites](#-prerequisites)
+- [Build](#-build)
+- [Test](#-test)
+- [Run](#-run)
+- [API Endpoints](#-api-endpoints)
+- [Project Structure](#-project-structure)
+- [Push to GitHub](#-push-to-github)
+
+---
+
+## 🔧 Prerequisites
 
 - JDK {{ jdk_version }} or higher
 - Gradle 9.x (wrapper included)
 
-## Build
+## 🏗️ Build
 
 ```shell
 ./gradlew clean build
@@ -19,7 +39,7 @@ Build with Git information in JAR manifest:
 ./gradlew clean build -PenableGitInfo=true
 ```
 
-## Test
+## 🧪 Test
 
 ```shell
 ./gradlew clean test --rerun-tasks
@@ -31,7 +51,7 @@ Verbose test output:
 ./gradlew clean test --rerun-tasks -PverboseTests=true
 ```
 
-## Run
+## 🚀 Run
 
 ### Using Gradle
 
@@ -55,12 +75,14 @@ Then run:
 java -jar build/libs/{{ project_name }}-all.jar
 ```
 
-## API Endpoints
+## 🌐 API Endpoints
 
-- `GET /` - Returns a JSON welcome message
-- `GET /hello?name=YourName` - Returns a personalized greeting
+| Method | Endpoint | Description |
+|--------|----------|-------------|
+| `GET`  | `/` | Returns a JSON welcome message |
+| `GET`  | `/hello?name=YourName` | Returns a personalized greeting |
 
-## Project Structure
+## 📁 Project Structure
 
 ```
 src/
@@ -71,7 +93,9 @@ src/
     kotlin/       - Test source code
 ```
 
-## Push to GitHub
+---
+
+## 🚀 Push to GitHub
 
 Your project is ready to push to GitHub!
 
@@ -119,7 +143,7 @@ git branch -M main
 git push -u origin main
 ```
 
-> **Tip:** SSH Setup: https://docs.github.com/en/authentication/connecting-to-github-with-ssh
+> **💡 Tip:** SSH Setup: https://docs.github.com/en/authentication/connecting-to-github-with-ssh
 
 Verify committed files:
 
@@ -129,6 +153,8 @@ git log --oneline # Should show initial commit
 git ls-files      # Show all tracked files
 ```
 
-## Version
+---
+
+## 📄 Version
 
 {{ group }}:{{ project_name }}:{{ version }}

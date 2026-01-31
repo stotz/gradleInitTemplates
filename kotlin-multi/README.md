@@ -1,13 +1,32 @@
 # {{ project_name }}
 
-A Kotlin multi-module application generated with gradleInit.
+[![Kotlin](https://img.shields.io/badge/Kotlin-{{ kotlin_version }}-7F52FF.svg?logo=kotlin)](https://kotlinlang.org)
+[![Gradle](https://img.shields.io/badge/Gradle-9.x-02303A.svg?logo=gradle)](https://gradle.org)
+[![JDK](https://img.shields.io/badge/JDK-{{ jdk_version }}-ED8B00.svg?logo=openjdk)](https://openjdk.org)
+[![License](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 
-## Prerequisites
+> A Kotlin multi-module application generated with [gradleInit](https://github.com/anthropics/gradleInit).
+
+---
+
+## 📋 Table of Contents
+
+- [Prerequisites](#-prerequisites)
+- [Build](#-build)
+- [Test](#-test)
+- [Run](#-run)
+- [Project Structure](#-project-structure)
+- [Modules](#-modules)
+- [Push to GitHub](#-push-to-github)
+
+---
+
+## 🔧 Prerequisites
 
 - JDK {{ jdk_version }} or higher
 - Gradle 9.x (wrapper included)
 
-## Build
+## 🏗️ Build
 
 ```shell
 ./gradlew clean build
@@ -19,7 +38,7 @@ Build with Git information in JAR manifest:
 ./gradlew clean build -PenableGitInfo=true
 ```
 
-## Test
+## 🧪 Test
 
 ```shell
 ./gradlew clean test --rerun-tasks
@@ -31,7 +50,7 @@ Verbose test output:
 ./gradlew clean test --rerun-tasks -PverboseTests=true
 ```
 
-## Run
+## 🚀 Run
 
 ### Using Gradle
 
@@ -53,7 +72,7 @@ Then run:
 ./app/build/install/app/bin/app
 ```
 
-## Project Structure
+## 📁 Project Structure
 
 ```
 app/                  - Main application module
@@ -69,12 +88,16 @@ gradle/
   libs.versions.toml  - Version catalog
 ```
 
-## Modules
+## 📦 Modules
 
-- **app** - Main application entry point
-- **lib** - Shared library code
+| Module | Description |
+|--------|-------------|
+| `app`  | Main application entry point |
+| `lib`  | Shared library code |
 
-## Push to GitHub
+---
+
+## 🚀 Push to GitHub
 
 Your project is ready to push to GitHub!
 
@@ -122,7 +145,7 @@ git branch -M main
 git push -u origin main
 ```
 
-> **Tip:** SSH Setup: https://docs.github.com/en/authentication/connecting-to-github-with-ssh
+> **💡 Tip:** SSH Setup: https://docs.github.com/en/authentication/connecting-to-github-with-ssh
 
 Verify committed files:
 
@@ -132,6 +155,8 @@ git log --oneline # Should show initial commit
 git ls-files      # Show all tracked files
 ```
 
-## License
+---
+
+## 📄 License
 
 {{ company }} - {{ version }}
