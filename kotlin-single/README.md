@@ -13,6 +13,12 @@ A Kotlin application generated with gradleInit.
 ./gradlew clean build
 ```
 
+Build with Git information in JAR manifest:
+
+```shell
+./gradlew clean build -PenableGitInfo=true
+```
+
 ## Test
 
 ```shell
@@ -33,19 +39,28 @@ Verbose test output:
 ./gradlew run
 ```
 
-### Using Java JAR
+### Using Fat JAR (recommended)
 
-Build the JAR first:
+Build the fat JAR first:
 
 ```shell
-./gradlew jar
+./gradlew shadowJar
 ```
 
 Then run:
 
 ```shell
-java -cp build/libs/{{ project_name }}-{{ version }}.jar {{ group }}.MainKt
+java -jar build/libs/{{ project_name }}-{{ version }}-all.jar --help
 ```
+{% if enable_clikt %}
+
+Example commands:
+
+```shell
+java -jar build/libs/{{ project_name }}-{{ version }}-all.jar greet -n "World" -c 3
+java -jar build/libs/{{ project_name }}-{{ version }}-all.jar info --verbose
+```
+{% endif %}
 
 ## Project Structure
 
@@ -57,6 +72,64 @@ src/
     kotlin/       - Test source code
 gradle/
   libs.versions.toml  - Version catalog
+```
+
+## Push to GitHub
+
+Your project is ready to push to GitHub!
+
+### Option 1: Create new repository on GitHub
+
+1. Go to https://github.com/new
+2. Repository name: `{{ project_name }}`
+3. **DO NOT** initialize with README, .gitignore, or license
+4. Click 'Create repository'
+5. Then run:
+
+```shell
+cd {{ project_name }}
+
+# Using HTTPS (easier, requires username/password or token)
+git remote add origin https://github.com/YOUR_USERNAME/{{ project_name }}.git
+git branch -M main
+git push -u origin main
+
+# OR using SSH (recommended, requires SSH key setup)
+git remote add origin git@github.com:YOUR_USERNAME/{{ project_name }}.git
+git branch -M main
+git push -u origin main
+```
+
+### Option 2: Using GitHub CLI (recommended)
+
+```shell
+cd {{ project_name }}
+gh repo create {{ project_name }} --public --source=. --push
+```
+
+### Option 3: Push to existing repository
+
+```shell
+cd {{ project_name }}
+
+# HTTPS:
+git remote add origin https://github.com/YOUR_USERNAME/YOUR_REPO.git
+
+# OR SSH:
+git remote add origin git@github.com:YOUR_USERNAME/YOUR_REPO.git
+
+git branch -M main
+git push -u origin main
+```
+
+> **Tip:** SSH Setup: https://docs.github.com/en/authentication/connecting-to-github-with-ssh
+
+Verify committed files:
+
+```shell
+git status        # Should be clean
+git log --oneline # Should show initial commit
+git ls-files      # Show all tracked files
 ```
 
 ## License

@@ -3,6 +3,7 @@ package {{ group }}
 
 import com.github.ajalt.clikt.core.CliktCommand
 import com.github.ajalt.clikt.core.Context
+import com.github.ajalt.clikt.core.installMordantMarkdown
 import com.github.ajalt.clikt.core.main
 import com.github.ajalt.clikt.core.subcommands
 import com.github.ajalt.clikt.parameters.options.default
@@ -16,7 +17,7 @@ import com.github.ajalt.clikt.parameters.types.int
  * A CLI application built with Clikt.
  */
 fun main(args: Array<String>) = App()
-    .subcommands(InfoCommand())
+    .subcommands(InfoCommand(), GreetCommand())
     .main(args)
 
 /**
@@ -24,24 +25,85 @@ fun main(args: Array<String>) = App()
  */
 class App : CliktCommand(name = "{{ project_name }}") {
 
-    // Allow running without subcommand
+    init {
+        installMordantMarkdown()
+    }
+
     override val invokeWithoutSubcommand = true
 
     override fun help(context: Context): String = """
-        {{ project_name }} - A Kotlin CLI application.
+        **{{ project_name }}** - A Kotlin CLI application with *Markdown* support.
         
-        Use --help on any command for more information.
+        This application demonstrates **Clikt 5.x** features including:
+        
+        - Rich help text with `Markdown` formatting
+        - Subcommands with shared context
+        - JAR manifest information display
+        
+        ## Quick Start
+        
+        ```
+        {{ project_name }} greet -n "World" -c 3
+        {{ project_name }} info --verbose
+        ```
+        
+        ## Available Commands
+        
+        | Command | Description                    |
+        |---------|--------------------------------|
+        | greet   | Greet someone multiple times   |
+        | info    | Show build and version info    |
+        
+        ## Exit Codes
+        
+        | Code | Meaning           |
+        |------|-------------------|
+        | 0    | Success           |
+        | 1    | General error     |
+        | 2    | Invalid arguments |
+        
+        > **Tip:** Use `--help` on any subcommand for detailed usage.
+    """.trimIndent()
+
+    override fun run() {
+        if (currentContext.invokedSubcommand == null) {
+            echo(currentContext.command.getFormattedHelp())
+        }
+    }
+}
+
+/**
+ * Greet subcommand - greets someone with customizable options.
+ */
+class GreetCommand : CliktCommand(name = "greet") {
+
+    override fun help(context: Context): String = """
+        Greet someone with a **personalized message**.
+        
+        ## Options
+        
+        - `-n, --name`: The name to greet (*default: World*)
+        - `-c, --count`: Number of repetitions (*default: 1*)
+        - `-u, --uppercase`: Convert greeting to UPPERCASE
+        
+        ## Examples
+        
+        ```
+        {{ project_name }} greet                      # Hello, World!
+        {{ project_name }} greet -n "Kotlin"          # Hello, Kotlin!
+        {{ project_name }} greet -n "Dev" -c 3        # Greets 3 times
+        {{ project_name }} greet -n "LOUD" -u         # HELLO, LOUD!
+        ```
     """.trimIndent()
 
     private val name by option("-n", "--name", help = "Name to greet").default("World")
     private val count by option("-c", "--count", help = "Number of greetings").int().default(1)
+    private val uppercase by option("-u", "--uppercase", help = "Convert to uppercase").flag()
 
     override fun run() {
-        // Only run if no subcommand was invoked
-        if (currentContext.invokedSubcommand == null) {
-            repeat(count) {
-                echo("Hello, $name!")
-            }
+        repeat(count) {
+            val greeting = "Hello, $name!"
+            echo(if (uppercase) greeting.uppercase() else greeting)
         }
     }
 }
@@ -51,7 +113,27 @@ class App : CliktCommand(name = "{{ project_name }}") {
  */
 class InfoCommand : CliktCommand(name = "info") {
 
-    override fun help(context: Context): String = "Display build and version information"
+    override fun help(context: Context): String = """
+        Display **build** and **version** information from JAR manifest.
+        
+        ## Information Displayed
+        
+        | Category | Attributes                              |
+        |----------|-----------------------------------------|
+        | Basic    | Version, Vendor                         |
+        | Git      | Commit, Branch, Tag, Dirty status       |
+        | Build    | Time, OS, Host, JDK, Builder            |
+        
+        ## Build Options
+        
+        Build with Git info enabled:
+        
+        ```
+        ./gradlew build -PenableGitInfo=true
+        ```
+        
+        > **Note:** Git information requires `-PenableGitInfo=true` during build.
+    """.trimIndent()
 
     private val verbose by option("-v", "--verbose", help = "Show all manifest attributes").flag()
 

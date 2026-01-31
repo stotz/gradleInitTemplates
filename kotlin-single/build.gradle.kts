@@ -19,8 +19,9 @@ dependencies {
     implementation(kotlin("stdlib"))
 {% if enable_clikt %}
 
-    // CLI framework (Clikt 5.x has built-in Markdown support for help messages)
+    // CLI framework with Markdown support for rich help text
     implementation(libs.clikt)
+    implementation(libs.clikt.markdown)
 {% endif %}
 
     // Testing
