@@ -5,9 +5,9 @@ version: 1.1.0
 tags: [kotlin, gradle, simple, single-module, cli]
 
 requirements:
-  gradle: ">=8.0"
+  gradle: ">=9.0"
   kotlin: ">=2.0"
-  jdk: ">=17"
+  jdk: ">=21"
 
 arguments:
   - name: group
@@ -130,7 +130,7 @@ The template uses these configuration values:
 - `enable_clikt` - Enable Clikt CLI framework (default: `false`)
 - `kotlin_version` - Kotlin version (from gradleInit defaults)
 - `gradle_version` - Gradle version (from gradleInit defaults)
-- `jdk_version` - JDK version (default: 21)
+- `jdk_version` - JDK version (default: 25)
 
 ### Enable Clikt CLI Framework
 
@@ -151,7 +151,7 @@ You can customize the generated project via `~/.gradleInit`:
 [defaults]
 group = "com.mycompany"
 version = "1.0.0"
-jdk_version = 21
+jdk_version = 25
 
 [custom]
 author = "Your Name"

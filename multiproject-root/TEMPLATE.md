@@ -5,9 +5,9 @@ version: 1.0.0
 tags: [kotlin, gradle, multi-module, root]
 
 requirements:
-  gradle: ">=8.0"
+  gradle: ">=9.0"
   kotlin: ">=2.0"
-  jdk: ">=17"
+  jdk: ">=21"
 
 raw_copy:
   - dump_src.sh

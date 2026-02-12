@@ -19,14 +19,18 @@ repositories {
 
 dependencies {
     implementation(libs.spring.boot.starter.web)
-    implementation(libs.jackson.module.kotlin)
     implementation(libs.kotlin.reflect)
     
     testImplementation(libs.spring.boot.starter.test)
+    testImplementation(kotlin("test-junit5"))
+    testRuntimeOnly("org.junit.platform:junit-platform-launcher")
 }
 
 kotlin {
     jvmToolchain(libs.versions.jdk.get().toInt())
+    compilerOptions {
+        freeCompilerArgs.addAll("-Xjsr305=strict", "-Xannotation-default-target=param-property")
+    }
 }
 
 java {

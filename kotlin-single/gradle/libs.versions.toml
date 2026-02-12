@@ -1,11 +1,18 @@
 [versions]
-jdk = "{{ @@03|(11|17|21)|JDK version=21@@jdk_version }}"
+# JDK version for toolchain
+jdk = "{{ @@03|(11|17|21|25)|JDK version=25@@jdk_version }}"
+# https://kotlinlang.org/
 kotlin = "{{ kotlin_version }}"
-shadow = "9.3.1"
+# https://mvnrepository.com/artifact/com.gradleup.shadow/shadow-gradle-plugin
+shadow = "9.0.0"
+# https://ajalt.github.io/clikt/
 clikt = "5.1.0"
-junit = "5.10.1"
-assertj = "3.24.2"
-mockk = "1.13.8"
+# https://mvnrepository.com/artifact/org.junit.jupiter/junit-jupiter-api
+junit = "5.12.2"
+# https://mvnrepository.com/artifact/org.assertj/assertj-core
+assertj = "3.27.3"
+# https://mvnrepository.com/artifact/io.mockk/mockk
+mockk = "1.14.2"
 
 [libraries]
 clikt = { module = "com.github.ajalt.clikt:clikt", version.ref = "clikt" }

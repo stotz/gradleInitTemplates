@@ -1,11 +1,21 @@
 [versions]
-jdk = "{{ @@03|(11|17|21)|JDK version=21@@jdk_version }}"
+# JDK version for toolchain
+jdk = "{{ @@03|(11|17|21|25)|JDK version=25@@jdk_version }}"
+# https://kotlinlang.org/
 kotlin = "{{ kotlin_version }}"
-shadow = "9.3.1"
-junit = "5.10.1"
+# https://mvnrepository.com/artifact/com.gradleup.shadow/shadow-gradle-plugin
+shadow = "9.0.0"
+# https://mvnrepository.com/artifact/org.junit.jupiter/junit-jupiter-api
+junit = "5.12.2"
+# https://mvnrepository.com/artifact/org.assertj/assertj-core
+assertj = "3.27.3"
+# https://mvnrepository.com/artifact/io.mockk/mockk
+mockk = "1.14.2"
 
 [libraries]
 junit-jupiter = { module = "org.junit.jupiter:junit-jupiter", version.ref = "junit" }
+assertj-core = { module = "org.assertj:assertj-core", version.ref = "assertj" }
+mockk = { module = "io.mockk:mockk", version.ref = "mockk" }
 
 [plugins]
 kotlin-jvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlin" }

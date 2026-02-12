@@ -5,7 +5,7 @@ version: 1.0.0
 tags: [kotlin, javafx, desktop, gui, ikonli, controlsfx, formsfx, validatorfx]
 
 requirements:
-  gradle: ">=8.0"
+  gradle: ">=9.0"
   kotlin: ">=2.0"
   jdk: ">=21"
 
