@@ -1,8 +1,33 @@
 ---
 name: Ktor Application
 description: Ktor server application with Kotlin
-version: 1.0.0
-tags: [kotlin, ktor, rest, api]
+version: 1.1.0
+tags: [kotlin, ktor, rest, api, server]
+
+help: |
+  Creates a Ktor web server application with modern async Kotlin.
+  
+  Features:
+    - Ktor 3.x with Netty server
+    - Content negotiation (JSON via kotlinx.serialization)
+    - YAML configuration support
+    - Logback logging
+    - Git info in JAR manifest (optional)
+  
+  Usage:
+    gradleInit init myApi --template ktor
+    gradleInit init myApi --template ktor --group com.mycompany
+  
+  Endpoints:
+    GET /                  Welcome message (JSON)
+    GET /hello?name=World  Personalized greeting
+  
+  Build & Run:
+    ./gradlew build                          # Build project
+    ./gradlew build -PenableGitInfo=true     # Build with Git info
+    ./gradlew run                            # Start server (port 8080)
+    ./gradlew buildFatJar                    # Create fat JAR
+    java -jar build/libs/*-all.jar           # Run fat JAR
 
 requirements:
   gradle: ">=9.0"
@@ -12,16 +37,9 @@ requirements:
 arguments:
   - name: group
     type: string
-    help: Maven group ID
+    help: Maven group ID (e.g. com.mycompany)
     context_key: group
     default: com.example
-    required: true
-    
-  - name: ktor_features
-    type: list
-    help: Ktor features to include
-    context_key: ktor_features
-    default: [serialization]
     required: false
 ---
 

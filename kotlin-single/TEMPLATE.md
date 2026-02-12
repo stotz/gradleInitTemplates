@@ -1,8 +1,28 @@
 ---
 name: Kotlin Single Project
 description: Simple single-module Kotlin project with Gradle Kotlin DSL
-version: 1.1.0
+version: 1.2.0
 tags: [kotlin, gradle, simple, single-module, cli]
+
+help: |
+  Creates a standalone Kotlin CLI application with modern Gradle setup.
+  
+  Features:
+    - Shadow plugin for fat JAR creation
+    - JUnit 5 + AssertJ + MockK testing
+    - Git info in JAR manifest (optional)
+    - Clikt CLI framework with Markdown help (optional)
+  
+  Usage:
+    gradleInit init myApp --template kotlin-single
+    gradleInit init myApp --template kotlin-single --group com.mycompany
+    gradleInit init myApp --template kotlin-single --config enable_clikt=true
+  
+  Build & Run:
+    ./gradlew build                          # Build project
+    ./gradlew build -PenableGitInfo=true     # Build with Git info
+    ./gradlew run                            # Run application
+    java -jar build/libs/*-all.jar --help    # Run fat JAR
 
 requirements:
   gradle: ">=9.0"
@@ -12,10 +32,10 @@ requirements:
 arguments:
   - name: group
     type: string
-    help: Maven group ID
+    help: Maven group ID (e.g. com.mycompany)
     context_key: group
     default: com.example
-    required: true
+    required: false
     
   - name: version
     type: string

@@ -1,8 +1,33 @@
 ---
 name: Kotlin Multi-Module Project
 description: Multi-module Kotlin project with convention plugins
-version: 1.0.0
+version: 1.1.0
 tags: [kotlin, gradle, multi-module, buildSrc]
+
+help: |
+  Creates a multi-module Kotlin project with shared convention plugins.
+  
+  Features:
+    - Convention plugins in buildSrc for shared configuration
+    - App module (application) + Lib module (library)
+    - Centralized version catalog
+    - Git info in JAR manifest (optional)
+  
+  Usage:
+    gradleInit init myProject --template kotlin-multi
+    gradleInit init myProject --template kotlin-multi --group com.mycompany
+  
+  Structure:
+    myProject/
+      buildSrc/           # Convention plugins
+      app/                # Application module
+      lib/                # Library module
+      gradle/libs.versions.toml
+  
+  Build & Run:
+    ./gradlew build                          # Build all modules
+    ./gradlew build -PenableGitInfo=true     # Build with Git info
+    ./gradlew :app:run                       # Run application
 
 requirements:
   gradle: ">=9.0"
@@ -12,10 +37,10 @@ requirements:
 arguments:
   - name: group
     type: string
-    help: Maven group ID
+    help: Maven group ID (e.g. com.mycompany)
     context_key: group
     default: com.example
-    required: true
+    required: false
 ---
 
 # Kotlin Multi-Module Project

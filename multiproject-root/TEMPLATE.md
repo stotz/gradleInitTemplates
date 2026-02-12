@@ -1,8 +1,37 @@
 ---
 name: Multiproject Root
 description: Root project structure for multi-module Gradle builds
-version: 1.0.0
+version: 1.1.0
 tags: [kotlin, gradle, multi-module, root]
+
+help: |
+  Creates a root project structure for multi-module Gradle builds.
+  
+  Features:
+    - Convention plugins in buildSrc
+    - Centralized version catalog
+    - Ready for adding subprojects
+    - Git info in JAR manifest (optional)
+  
+  Usage:
+    gradleInit init myProject --template multiproject-root
+    gradleInit init myProject --template multiproject-root --group com.mycompany
+  
+  Adding Subprojects:
+    cd myProject
+    gradleInit subproject api --template ktor
+    gradleInit subproject core --template kotlin-single
+    gradleInit subproject ui --template kotlin-javaFX
+  
+  Structure:
+    myProject/
+      buildSrc/                # Convention plugins
+      gradle/libs.versions.toml
+      settings.gradle.kts
+  
+  Build:
+    ./gradlew build                          # Build all modules
+    ./gradlew build -PenableGitInfo=true     # Build with Git info
 
 requirements:
   gradle: ">=9.0"
@@ -18,10 +47,10 @@ raw_copy:
 arguments:
   - name: group
     type: string
-    help: Maven group ID
+    help: Maven group ID (e.g. com.mycompany)
     context_key: group
     default: com.example
-    required: true
+    required: false
 ---
 
 # Multiproject Root Template

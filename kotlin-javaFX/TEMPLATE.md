@@ -1,8 +1,31 @@
 ---
 name: Kotlin JavaFX Project
 description: Modern JavaFX application with Kotlin, including Ikonli, ControlsFX, FormsFX, and ValidatorFX
-version: 1.0.0
+version: 1.1.0
 tags: [kotlin, javafx, desktop, gui, ikonli, controlsfx, formsfx, validatorfx]
+
+help: |
+  Creates a modern JavaFX desktop application with Kotlin.
+  
+  Features:
+    - JavaFX 25 with cross-platform natives
+    - Ikonli icons (FontAwesome 5)
+    - ControlsFX enhanced controls
+    - FormsFX declarative forms
+    - ValidatorFX input validation
+    - JLink native packaging
+    - Git info in JAR manifest (optional)
+  
+  Usage:
+    gradleInit init myApp --template kotlin-javaFX
+    gradleInit init myApp --template kotlin-javaFX --group com.mycompany
+  
+  Build & Run:
+    ./gradlew build                          # Build project
+    ./gradlew build -PenableGitInfo=true     # Build with Git info
+    ./gradlew run                            # Run application
+    ./gradlew jlink                          # Create native image
+    ./gradlew jlinkZip                       # Create distributable ZIP
 
 requirements:
   gradle: ">=9.0"
@@ -12,10 +35,10 @@ requirements:
 arguments:
   - name: group
     type: string
-    help: Maven group ID
+    help: Maven group ID (e.g. com.mycompany)
     context_key: group
     default: com.example
-    required: true
+    required: false
     
   - name: version
     type: string
