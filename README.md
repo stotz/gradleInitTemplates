@@ -3,7 +3,7 @@
 Official template repository for [gradleInit](https://github.com/stotz/gradleInit).
 
 ## Available Templates
- 
+
 ### kotlin-single
 Simple single-module Kotlin project with Gradle Kotlin DSL.
 
