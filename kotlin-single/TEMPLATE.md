@@ -1,7 +1,7 @@
 ---
 name: Kotlin Single Project
 description: Simple single-module Kotlin project with Gradle Kotlin DSL
-version: 1.2.0
+version: 1.3.0
 tags: [kotlin, gradle, simple, single-module, cli]
 
 help: |
@@ -28,6 +28,20 @@ requirements:
   gradle: ">=9.0"
   kotlin: ">=2.0"
   jdk: ">=21"
+
+subproject_mode:
+  build_file: build.gradle.kts.subproject
+  merge_versions: gradle/libs.versions.toml
+  skip:
+    - settings.gradle.kts
+    - gradle/
+    - .gitignore
+    - .gitattributes
+    - .editorconfig
+    - gradle.properties
+    - README.md
+    - dump_src.sh.raw
+    - dump_src.cfg.raw
 
 arguments:
   - name: group
