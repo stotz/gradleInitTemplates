@@ -1,11 +1,11 @@
 [versions]
 # JDK version for toolchain
 jdk = "{{ @@03|(11|17|21|25)|JDK version=25@@jdk_version }}"
-# https://kotlinlang.org/
+# https://mvnrepository.com/artifact/org.jetbrains.kotlin/kotlin-stdlib
 kotlin = "{{ kotlin_version }}"
 # https://mvnrepository.com/artifact/com.gradleup.shadow/shadow-gradle-plugin
 shadow = "9.0.0"
-# https://ajalt.github.io/clikt/
+# https://mvnrepository.com/artifact/com.github.ajalt.clikt/clikt
 clikt = "5.0.3"
 # https://mvnrepository.com/artifact/org.junit.jupiter/junit-jupiter-api
 junit = "5.12.2"
