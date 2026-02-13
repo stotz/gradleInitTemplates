@@ -19,13 +19,13 @@ dependencies {
     implementation(kotlin("stdlib"))
 {% if enable_clikt %}
 
-    // CLI framework with Markdown support (using mordant-core without JNA to avoid native access warnings)
+    // CLI framework with Markdown help rendering (without JNA to avoid native access warnings on JDK 21+)
     implementation(libs.clikt) {
         exclude(group = "com.github.ajalt.mordant", module = "mordant-jvm-jna")
-        exclude(group = "com.github.ajalt.mordant", module = "mordant-jvm-ffm")
     }
-    implementation(libs.mordant.core)
-    implementation(libs.mordant.markdown)
+    implementation(libs.clikt.markdown) {
+        exclude(group = "com.github.ajalt.mordant", module = "mordant-jvm-jna")
+    }
 {% endif %}
 
     // Testing

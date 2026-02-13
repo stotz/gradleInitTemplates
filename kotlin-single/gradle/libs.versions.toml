@@ -7,8 +7,6 @@ kotlin = "{{ kotlin_version }}"
 shadow = "9.0.0"
 # https://ajalt.github.io/clikt/
 clikt = "5.0.3"
-# https://ajalt.github.io/mordant/
-mordant = "3.0.2"
 # https://mvnrepository.com/artifact/org.junit.jupiter/junit-jupiter-api
 junit = "5.12.2"
 # https://mvnrepository.com/artifact/org.assertj/assertj-core
@@ -17,10 +15,9 @@ assertj = "3.27.3"
 mockk = "1.14.2"
 
 [libraries]
-# Clikt without JNA (no native access warnings on JDK 21+)
+# Clikt CLI framework with Markdown help rendering
 clikt = { module = "com.github.ajalt.clikt:clikt", version.ref = "clikt" }
-mordant-core = { module = "com.github.ajalt.mordant:mordant-core", version.ref = "mordant" }
-mordant-markdown = { module = "com.github.ajalt.mordant:mordant-markdown", version.ref = "mordant" }
+clikt-markdown = { module = "com.github.ajalt.clikt:clikt-markdown", version.ref = "clikt" }
 junit-jupiter = { module = "org.junit.jupiter:junit-jupiter", version.ref = "junit" }
 assertj-core = { module = "org.assertj:assertj-core", version.ref = "assertj" }
 mockk = { module = "io.mockk:mockk", version.ref = "mockk" }
