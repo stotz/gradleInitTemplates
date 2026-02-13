@@ -18,7 +18,7 @@ import kotlin.math.abs
 import kotlin.math.hypot
 
 /**
- * JavaFX Application for {{ app_name }}
+ * JavaFX Application for {{ app_name | default(project_name) }}
  *
  * This starter application demonstrates:
  * - Menu bar with standard File/Edit/Help menus
@@ -41,7 +41,7 @@ class App : Application() {
     private var clickCount = 0
 
     override fun start(stage: Stage) {
-        stage.title = "{{ app_name }}"
+        stage.title = "{{ app_name | default(project_name) }}"
         stage.scene = Scene(createMainLayout(stage), 1000.0, 700.0)
         stage.show()
     }
@@ -121,7 +121,7 @@ class App : Application() {
                             setOnAction {
                                 Alert(Alert.AlertType.INFORMATION).apply {
                                     title = "About"
-                                    headerText = "{{ app_name }}"
+                                    headerText = "{{ app_name | default(project_name) }}"
                                     contentText = "Version {{ version }}\nBuilt with Kotlin {{ kotlin_version }}\n\n{{ vendor }}"
                                 }.showAndWait()
                             }
@@ -214,7 +214,7 @@ class App : Application() {
             style = "-fx-background-color: white; -fx-border-color: #d0d0d0; -fx-border-radius: 5; -fx-background-radius: 5;"
 
             // Title
-            children.add(Label("{{ app_name }}").apply {
+            children.add(Label("{{ app_name | default(project_name) }}").apply {
                 style = "-fx-font-size: 20px; -fx-font-weight: bold;"
             })
 

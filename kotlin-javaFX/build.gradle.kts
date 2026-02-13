@@ -37,7 +37,7 @@ dependencies {
 
     implementation(libs.ikonli.javafx)
     implementation(libs.ikonli.fontawesome5)
-    testImplementation(libs.junit)
+    testImplementation(libs.junit.jupiter)
 
 }
 
@@ -127,7 +127,7 @@ val gitDirty: Provider<String> = providers.exec {
 tasks.jar {
     manifest {
         attributes(
-            "Implementation-Title" to "{{ @@05|Application display name=My JavaFX App@@app_name }}",
+            "Implementation-Title" to "{{ app_name | default(project_name) }}",
             "Implementation-Version" to version.toString(),
             "Implementation-Vendor" to "{{ @@06|Vendor/Author name=Example Corp@@vendor }}"
         )

@@ -24,7 +24,7 @@ import net.synedra.validatorfx.Validator
 import kotlin.math.hypot
 
 /**
- * Advanced JavaFX Demo for {{ app_name }}
+ * Advanced JavaFX Demo for {{ app_name | default(project_name) }}
  * 
  * Comprehensive demonstration of UI libraries:
  * - Ikonli: Icon fonts (FontAwesome 5)
@@ -42,7 +42,7 @@ import kotlin.math.hypot
 class AdvancedDemo : Application() {
 
     override fun start(stage: Stage) {
-        stage.title = "{{ app_name }} - Advanced Demo"
+        stage.title = "{{ app_name | default(project_name) }} - Advanced Demo"
         
         val tabPane = createTabPane(stage)
         stage.scene = Scene(tabPane, 1200.0, 750.0)

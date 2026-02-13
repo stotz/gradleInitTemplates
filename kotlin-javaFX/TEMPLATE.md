@@ -19,6 +19,7 @@ help: |
   Usage:
     gradleInit init myApp --template kotlin-javaFX
     gradleInit init myApp --template kotlin-javaFX --group com.mycompany
+    gradleInit init myApp --template kotlin-javaFX --config app_name="My Cool App"
   
   Build & Run:
     ./gradlew build                          # Build project
@@ -45,6 +46,12 @@ arguments:
     help: Project version
     context_key: version
     default: "1.0.0"
+    required: false
+
+  - name: app_name
+    type: string
+    help: Application display name (defaults to project name)
+    context_key: app_name
     required: false
 ---
 

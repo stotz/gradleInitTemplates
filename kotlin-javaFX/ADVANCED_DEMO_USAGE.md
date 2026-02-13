@@ -13,7 +13,7 @@ By default, when you run the application, you get a **selection screen**:
 
 ```
 ┌─────────────────────────────────────┐
-│     {{ app_name }}                  │
+│     {{ app_name | default(project_name) }}                  │
 │                                     │
 │  Select which application to launch:│
 │                                     │

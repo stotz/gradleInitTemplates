@@ -1,4 +1,4 @@
-# {{ app_name }}
+# {{ app_name | default(project_name) }}
 
 [![Kotlin](https://img.shields.io/badge/Kotlin-{{ kotlin_version }}-7F52FF.svg?logo=kotlin)](https://kotlinlang.org)
 [![JavaFX](https://img.shields.io/badge/JavaFX-{{ javafx_version }}-007396.svg?logo=java)](https://openjfx.io)

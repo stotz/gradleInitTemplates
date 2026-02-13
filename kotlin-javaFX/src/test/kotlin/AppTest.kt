@@ -4,7 +4,7 @@ import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.Assertions.*
 
 /**
- * Simple test for {{ app_name }}.
+ * Simple test for {{ app_name | default(project_name) }}.
  * 
  * Note: For JavaFX UI testing, consider using TestFX:
  * https://github.com/TestFX/TestFX

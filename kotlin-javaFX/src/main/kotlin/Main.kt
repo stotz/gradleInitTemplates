@@ -11,7 +11,7 @@ import javafx.scene.layout.VBox
 import javafx.stage.Stage
 
 /**
- * Main entry point for {{ app_name }}
+ * Main entry point for {{ app_name | default(project_name) }}
  *
  * Generated: {{ now().strftime('%Y-%m-%d %H:%M:%S') }}
  */
@@ -38,14 +38,14 @@ fun main(args: Array<String>) {
  */
 class LauncherApp : Application() {
     override fun start(stage: Stage) {
-        stage.title = "{{ app_name }} - Select Demo"
+        stage.title = "{{ app_name | default(project_name) }} - Select Demo"
         
         val content = VBox(20.0).apply {
             padding = Insets(40.0)
             alignment = Pos.CENTER
             
             children.addAll(
-                Label("{{ app_name }}").apply {
+                Label("{{ app_name | default(project_name) }}").apply {
                     style = "-fx-font-size: 24px; -fx-font-weight: bold;"
                 },
                 
