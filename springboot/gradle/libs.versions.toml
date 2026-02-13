@@ -4,7 +4,7 @@ jdk = "{{ @@03|(21|24|25)|JDK version=24@@jdk_version }}"
 # https://kotlinlang.org/
 kotlin = "{{ kotlin_version }}"
 # https://mvnrepository.com/artifact/com.gradleup.shadow/shadow-gradle-plugin
-shadow = "9.0.0"
+shadow = "9.3.1"
 # https://spring.io/projects/spring-boot
 spring-boot = "4.0.2"
 # https://mvnrepository.com/artifact/io.spring.gradle/dependency-management-plugin
@@ -12,9 +12,9 @@ spring-dependency-management = "1.1.7"
 # https://mvnrepository.com/artifact/org.junit.jupiter/junit-jupiter-api
 junit = "5.12.2"
 # https://mvnrepository.com/artifact/org.assertj/assertj-core
-assertj = "3.27.3"
+assertj = "3.27.7"
 # https://mvnrepository.com/artifact/io.mockk/mockk
-mockk = "1.14.2"
+mockk = "1.14.9"
 
 [libraries]
 spring-boot-starter-web = { module = "org.springframework.boot:spring-boot-starter-web" }
