@@ -1,17 +1,24 @@
 plugins {
     id("kotlin-common-conventions")
     alias(libs.plugins.kotlin.serialization)
-    alias(libs.plugins.ktor)
+    alias(libs.plugins.shadow)
+    application
 }
 
 application {
-    mainClass = "{{ group }}.ApplicationKt"
+    mainClass.set("io.ktor.server.netty.EngineMain")
+}
+
+tasks.shadowJar {
+    archiveClassifier.set("all")
+    mergeServiceFiles()
 }
 
 dependencies {
     implementation(libs.ktor.server.core.jvm)
     implementation(libs.ktor.server.netty)
     implementation(libs.ktor.server.core)
+    implementation(libs.ktor.server.config.yaml)
     implementation(libs.ktor.server.content.negotiation)
     implementation(libs.ktor.serialization.kotlinx.json)
     implementation(libs.logback.classic)
