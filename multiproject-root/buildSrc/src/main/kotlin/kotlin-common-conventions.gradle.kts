@@ -9,10 +9,6 @@ plugins {
 group = "{{ @@01|Maven group ID (e.g. com.company)=com.example@@group }}"
 version = "{{ @@02|Project version=1.0.0@@version }}"
 
-repositories {
-    mavenCentral()
-}
-
 dependencies {
     implementation(kotlin("stdlib"))
     testImplementation(kotlin("test"))
