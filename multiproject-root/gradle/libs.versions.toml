@@ -1,11 +1,47 @@
 [versions]
-# https://mvnrepository.com/artifact/org.jetbrains.kotlin/kotlin-stdlib
+# Version constraints (npm/semver syntax):
+#   @pin            = never update (default)
+#   @*              = always update to latest
+#   @^1.2.3         = minor updates (>=1.2.3 <2.0.0)
+#   @~1.2.3         = patch updates (>=1.2.3 <1.3.0)
+#   @>=1.0.0        = minimum version
+#   @<2.0.0         = maximum version
+#   @>=1.0 <2.0     = range
+#   @1.x            = any 1.x version
+
+# JDK version for toolchain
+jdk = "{{ @@03|(11|17|21|25)|JDK version=25@@jdk_version }}"
+# https://mvnrepository.com/artifact/org.jetbrains.kotlin/kotlin-stdlib @pin
 kotlin = "{{ kotlin_version }}"
-# https://mvnrepository.com/artifact/org.junit.jupiter/junit-jupiter-api
+# https://mvnrepository.com/artifact/com.gradleup.shadow/shadow-gradle-plugin @pin
+shadow = "9.3.1"
+# https://mvnrepository.com/artifact/com.github.ajalt.clikt/clikt @pin
+clikt = "5.1.0"
+# https://mvnrepository.com/artifact/io.ktor/ktor-server-core-jvm @pin
+ktor = "3.4.0"
+# https://mvnrepository.com/artifact/ch.qos.logback/logback-classic @pin
+logback = "1.5.29"
+# https://mvnrepository.com/artifact/org.springframework.boot/spring-boot @pin
+spring-boot = "4.0.2"
+# https://mvnrepository.com/artifact/io.spring.gradle/dependency-management-plugin @pin
+spring-dependency-management = "1.1.7"
+# https://mvnrepository.com/artifact/org.beryx.jlink/org.beryx.jlink.gradle.plugin @pin
+beryx_jlink = "3.1.3"
+# https://mvnrepository.com/artifact/org.openjfx/javafx-base @pin
+javafx = "25.0.1"
+# https://mvnrepository.com/artifact/org.kordamp.ikonli/ikonli-javafx @pin
+ikonli = "12.4.0"
+# https://mvnrepository.com/artifact/com.dlsc.formsfx/formsfx-core @pin
+formsfx = "11.6.0"
+# https://mvnrepository.com/artifact/org.controlsfx/controlsfx @pin
+controlsfx = "11.2.2"
+# https://mvnrepository.com/artifact/net.synedra/validatorfx @pin
+validatorfx = "0.6.3"
+# https://mvnrepository.com/artifact/org.junit.jupiter/junit-jupiter-api @pin
 junit = "5.13.4"
-# https://mvnrepository.com/artifact/org.assertj/assertj-core
+# https://mvnrepository.com/artifact/org.assertj/assertj-core @pin
 assertj = "3.27.3"
-# https://mvnrepository.com/artifact/io.mockk/mockk
+# https://mvnrepository.com/artifact/io.mockk/mockk @pin
 mockk = "1.14.9"
 
 [libraries]
@@ -16,9 +52,43 @@ junit-engine = { module = "org.junit.jupiter:junit-jupiter-engine", version.ref 
 junit-jupiter = { module = "org.junit.jupiter:junit-jupiter", version.ref = "junit" }
 assertj-core = { module = "org.assertj:assertj-core", version.ref = "assertj" }
 mockk = { module = "io.mockk:mockk", version.ref = "mockk" }
+# Clikt CLI framework
+clikt = { module = "com.github.ajalt.clikt:clikt", version.ref = "clikt" }
+clikt-markdown = { module = "com.github.ajalt.clikt:clikt-markdown", version.ref = "clikt" }
+# Ktor server
+ktor-server-core-jvm = { module = "io.ktor:ktor-server-core-jvm", version.ref = "ktor" }
+ktor-server-netty = { module = "io.ktor:ktor-server-netty", version.ref = "ktor" }
+ktor-server-core = { module = "io.ktor:ktor-server-core", version.ref = "ktor" }
+ktor-server-config-yaml = { module = "io.ktor:ktor-server-config-yaml", version.ref = "ktor" }
+ktor-server-content-negotiation = { module = "io.ktor:ktor-server-content-negotiation", version.ref = "ktor" }
+ktor-serialization-kotlinx-json = { module = "io.ktor:ktor-serialization-kotlinx-json", version.ref = "ktor" }
+ktor-server-test-host = { module = "io.ktor:ktor-server-test-host", version.ref = "ktor" }
+logback-classic = { module = "ch.qos.logback:logback-classic", version.ref = "logback" }
+# Spring Boot
+spring-boot-starter-web = { module = "org.springframework.boot:spring-boot-starter-web" }
+spring-boot-starter-test = { module = "org.springframework.boot:spring-boot-starter-test" }
+jackson-module-kotlin = { module = "com.fasterxml.jackson.module:jackson-module-kotlin" }
+kotlin-reflect = { module = "org.jetbrains.kotlin:kotlin-reflect" }
+# JavaFX
+javafx-base = { module = "org.openjfx:javafx-base", version.ref = "javafx" }
+javafx-graphics = { module = "org.openjfx:javafx-graphics", version.ref = "javafx" }
+javafx-controls = { module = "org.openjfx:javafx-controls", version.ref = "javafx" }
+javafx-web = { module = "org.openjfx:javafx-web", version.ref = "javafx" }
+controlsfx = { module = "org.controlsfx:controlsfx", version.ref = "controlsfx" }
+formsfx-core = { module = "com.dlsc.formsfx:formsfx-core", version.ref = "formsfx" }
+validatorfx = { module = "net.synedra:validatorfx", version.ref = "validatorfx" }
+ikonli-javafx = { module = "org.kordamp.ikonli:ikonli-javafx", version.ref = "ikonli" }
+ikonli-fontawesome5 = { module = "org.kordamp.ikonli:ikonli-fontawesome5-pack", version.ref = "ikonli" }
 
 [bundles]
 testing = ["junit-api", "assertj-core", "mockk"]
 
 [plugins]
 kotlin-jvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlin" }
+shadow = { id = "com.gradleup.shadow", version.ref = "shadow" }
+kotlin-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin" }
+ktor = { id = "io.ktor.plugin", version.ref = "ktor" }
+kotlin-spring = { id = "org.jetbrains.kotlin.plugin.spring", version.ref = "kotlin" }
+spring-boot = { id = "org.springframework.boot", version.ref = "spring-boot" }
+spring-dependency-management = { id = "io.spring.dependency-management", version.ref = "spring-dependency-management" }
+beryx-jlink = { id = "org.beryx.jlink", version.ref = "beryx_jlink" }
