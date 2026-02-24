@@ -10,4 +10,14 @@ application {
 dependencies {
     // Add subproject-specific dependencies here
     // Example: implementation(project(":core"))
+{% if enable_clikt %}
+
+    // CLI framework with Markdown help rendering (without JNA to avoid native access warnings on JDK 21+)
+    implementation(libs.clikt) {
+        exclude(group = "com.github.ajalt.mordant", module = "mordant-jvm-jna")
+    }
+    implementation(libs.clikt.markdown) {
+        exclude(group = "com.github.ajalt.mordant", module = "mordant-jvm-jna")
+    }
+{% endif %}
 }
