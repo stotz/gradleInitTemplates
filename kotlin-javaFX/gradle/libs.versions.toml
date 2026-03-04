@@ -16,7 +16,7 @@ kotlin = "2.3.10"
 # https://mvnrepository.com/artifact/com.gradleup.shadow/shadow-gradle-plugin @pin
 shadow = "9.3.2"
 # https://mvnrepository.com/artifact/org.beryx.jlink/org.beryx.jlink.gradle.plugin @pin
-beryx_jlink = "3.1.3"
+beryx_jlink = "3.1.5"
 # https://mvnrepository.com/artifact/org.openjfx/javafx-base @pin
 javafx = "25.0.2"
 # https://mvnrepository.com/artifact/org.kordamp.ikonli/ikonli-javafx @pin
