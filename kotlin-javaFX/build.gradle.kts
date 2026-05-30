@@ -43,7 +43,8 @@ dependencies {
 
 val jdkVersion = libs.versions.jdk.get()
 kotlin {
-    jvmToolchain(jdkVersion.toInt())
+    // Kotlin 2.x supports max JDK 24 - cap at 24 if configured JDK is newer
+    jvmToolchain(minOf(jdkVersion.toInt(), 24))
 }
 
 java {

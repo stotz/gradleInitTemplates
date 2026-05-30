@@ -9,14 +9,18 @@ plugins {
 group = "{{ @@01|Maven group ID (e.g. com.company)=com.example@@group }}"
 version = "{{ @@02|Project version=1.0.0@@version }}"
 
+// Access version catalog from main project
+val libs = the<VersionCatalogsExtension>().named("libs")
+val jdkVersion = libs.findVersion("jdk").get().toString().toInt()
+
 dependencies {
     implementation(kotlin("stdlib"))
     testImplementation(kotlin("test"))
 }
 
-val jdkVersion = providers.gradleProperty("jdkVersion").get()
 kotlin {
-    jvmToolchain(jdkVersion.toInt())
+    // Kotlin 2.x supports max JDK 24 - cap at 24 if configured JDK is newer
+    jvmToolchain(minOf(jdkVersion, 24))
 }
 
 val verboseTests = providers
