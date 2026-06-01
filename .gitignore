@@ -1,1 +1,7 @@
 .idea/
+hs_err_pid*.log
+*.tar.bz2
+dump_src.cfg
+dump_src.sh
+docs/AI_*.md
+update_versions.py

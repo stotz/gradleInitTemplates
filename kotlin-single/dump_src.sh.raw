@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# version: 2.6.0 (bugfixes + cleanup)
+# version: 2.5.0 (colored output + full summary + help)
 
 set -euo pipefail
 
@@ -26,26 +26,33 @@ section() { printf "\n${BOLD}${BLUE}==> %s${RESET}\n" "$*"; }
 # --- HELP / USAGE ---
 show_help() {
   cat <<EOF
-dump_src.sh - Create a clean source archive using git ls-files + ignore list
+dump_src.sh – Create a clean source archive using git ls-files + ignore list
 
 USAGE:
   ./dump_src.sh
   ./dump_src.sh --dry-run
   ./dump_src.sh --help
+  ./dump_src.sh --help_git_rev
 
 OPTIONS:
   --help, -h
         Shows this help text.
 
+  ./dump_src.sh
+        Only git-tracked files are included by default (without dump_src.cfg)
+
   --dry-run
         Shows what would be archived, but does NOT create an archive.
+
+  --help_git_rev
+        Shows documentation for archiving a historical git revision.
+        No repository state is modified.
 
 CONFIG FILE (dump_src.cfg):
   This file is optional and may contain three variables:
 
-  1) archive_basename="project_name"
+  1) basename="project_name"
      Overrides the default archive base directory (project folder name).
-     Also accepted as "basename" for backwards compatibility.
 
   2) file_list=()
      List of files NOT tracked in git that should still be included.
@@ -60,7 +67,6 @@ CONFIG FILE (dump_src.cfg):
   3) ignore_list=()
      Regex patterns (bash [[ =~ ]] syntax) for files to exclude.
      Patterns match against git paths (relative paths).
-     Empty patterns are skipped.
 
      Example:
        ignore_list=(
@@ -72,11 +78,11 @@ CONFIG FILE (dump_src.cfg):
 
 FULL EXAMPLE (dump_src.cfg):
 
-  archive_basename="swekt"
+  basename="project_name"
 
+  # additional
   file_list=(
-    swe_test.py
-    local_settings.json
+    docs/TODO.md
   )
 
   ignore_list=(
@@ -87,11 +93,40 @@ FULL EXAMPLE (dump_src.cfg):
   )
 
 NOTES:
-  - git ls-files determines which files are included by default.
-  - ignore_list patterns use Bash regex matching.
-  - All archived paths start with "\$archive_basename/..."
-  - Extra files in file_list are added even if they are not in git.
+  • git ls-files determines which files are included by default.
+  • ignore_list patterns use Bash regex matching.
+  • All archived paths start with "\$basename/..."
+  • Extra files in file_list are added even if they are not in git.
 
+EOF
+}
+
+help_git_rev() {
+  cat <<EOF
+dump_src.sh always works on the currently checked-out repository state.
+It never modifies the repository (no checkout, no reset, no worktree).
+
+If you need an archive of a historical git revision, prepare that revision
+outside of your working repository and run dump_src.sh there.
+
+Recommended procedure:
+
+1. Create a temporary directory
+2. Check out the desired commit, tag, or branch in that directory
+3. Run dump_src.sh in that directory
+
+Example:
+
+mkdir tmp_git_rev
+cd tmp_git_rev
+
+git clone <repository-url> .
+git checkout <commit|tag|branch>
+
+./dump_src.sh
+
+This keeps the working repository untouched and avoids any risk of
+accidentally modifying your current work state.
 EOF
 }
 
@@ -101,6 +136,10 @@ if [[ $# -gt 0 ]]; then
   case "$1" in
     --help|-h|help)
       show_help
+      exit 0
+      ;;
+    --help_git_rev)
+      help_git_rev
       exit 0
       ;;
     --dry-run)
@@ -115,11 +154,17 @@ if [[ $# -gt 0 ]]; then
 fi
 
 # --- Resolve script directory ---
-SCRIPT_DIR="$(cd -P "$(dirname "${BASH_SOURCE[0]}")" >/dev/null 2>&1 && pwd)"
+SOURCE="${BASH_SOURCE[0]}"
+while [ -h "$SOURCE" ]; do
+  DIR="$( cd -P "$( dirname "$SOURCE" )" >/dev/null 2>&1 && pwd )"
+  SOURCE="$(readlink "$SOURCE")"
+  [[ "$SOURCE" != /* ]] && SOURCE="$DIR/$SOURCE"
+done
+SCRIPT_DIR="$( cd -P "$( dirname "$SOURCE" )" >/dev/null 2>&1 && pwd )"
 cd "$SCRIPT_DIR"
 
-project="$(command basename "$SCRIPT_DIR")"
-archive_basename="$project"
+project="$(basename "$SCRIPT_DIR")"
+basename="$project"
 
 file_list=()
 ignore_list=()
@@ -129,11 +174,9 @@ if [[ -f dump_src.cfg ]]; then
   section "Loading configuration"
   # shellcheck disable=SC1091
   source dump_src.cfg
-  # Backwards compatibility: accept legacy "basename" variable name
-  if [[ -n "${basename:-}" ]]; then
-    archive_basename="$basename"
-  fi
 fi
+
+basename="${basename:-$project}"
 
 # --- Ensure git repo ---
 section "Checking repository"
@@ -141,14 +184,12 @@ if ! git rev-parse --is-inside-work-tree >/dev/null 2>&1; then
   error "Not inside a git repository: $SCRIPT_DIR"
   exit 1
 fi
-ok "OK - inside git repository."
+ok "OK – inside git repository."
 
 # --- ignore helper ---
 is_ignored() {
   local fname="$1"
-  local pat
-  for pat in ${ignore_list[@]+"${ignore_list[@]}"}; do
-    [[ -z "$pat" ]] && continue
+  for pat in "${ignore_list[@]:-}"; do
     if [[ "$fname" =~ $pat ]]; then
       return 0
     fi
@@ -181,7 +222,8 @@ info "Found ${git_files_count} tracked git files."
 # ------------------------------------------------------------------------------
 section "Collecting extra files"
 extra_files=()
-for f in ${file_list[@]+"${file_list[@]}"}; do
+for f in "${file_list[@]:-}"; do
+  [[ -z "$f" ]] && continue
   extra_requested_count=$((extra_requested_count + 1))
 
   if [[ -f "$SCRIPT_DIR/$f" ]]; then
@@ -217,7 +259,9 @@ for f in "${git_files[@]}"; do
 done
 
 # extra files
-for f in ${extra_files[@]+"${extra_files[@]}"}; do
+for f in "${extra_files[@]}"; do
+  [[ -z "$f" ]] && continue
+
   if is_ignored "$f"; then
     ignored_files+=("$f")
     ignored_count=$((ignored_count + 1))
@@ -245,17 +289,18 @@ ok "Using ${archived_count} files."
 section "Preparing file list"
 
 tmpfile="$(mktemp "${TMPDIR:-/tmp}/dump_src.XXXXXX")"
-trap 'rm -f "$tmpfile"' EXIT
 
 for f in "${all_files_sorted[@]}"; do
-  printf '%s\n' "$f" >> "$tmpfile"
+  echo "$basename/$f" >> "$tmpfile"
 done
+
+info "Temporary file list: $tmpfile"
 
 # ------------------------------------------------------------------------------
 # 5. DRY-RUN MODE
 # ------------------------------------------------------------------------------
 if [[ "$dry_run" == true ]]; then
-  warn "DRY RUN - NO ARCHIVE CREATED!"
+  warn "DRY RUN – NO ARCHIVE CREATED!"
   section "Files that *would* be archived:"
   for f in "${all_files_sorted[@]}"; do
     echo "  $f"
@@ -272,25 +317,24 @@ fi
 # ------------------------------------------------------------------------------
 section "Creating archive"
 
-archive_path="$SCRIPT_DIR/$archive_basename.tar.bz2"
+(
+  cd "$SCRIPT_DIR/.."
+  tar cjpSvf "$basename/$basename.tar.bz2" --files-from "$tmpfile"
+)
 
-# Run tar from SCRIPT_DIR so paths in tmpfile resolve correctly,
-# and rewrite all archived paths to live under "$archive_basename/".
-tar -C "$SCRIPT_DIR" \
-    --transform="s|^|$archive_basename/|" \
-    -cjf "$archive_path" \
-    --files-from="$tmpfile"
-
+archive_path="$SCRIPT_DIR/$basename.tar.bz2"
 ok "Archive created: $archive_path"
+
+rm -f "$tmpfile"
 
 # ------------------------------------------------------------------------------
 # 7. Summary
 # ------------------------------------------------------------------------------
 section "Summary"
-sha256="$(sha256sum "$archive_path" | awk '{print $1}')"
-printf "project: %s\n" "$project"
-printf "archive: %s\n" "$archive_basename.tar.bz2"
-printf "sha256:  %s\n" "$sha256"
+sha256=$(sha256sum "$basename.tar.bz2" | awk '{print $1}')
+printf "%s%s\n" "project: " "$project"
+printf "%s%s\n" "archive: " "$basename.tar.bz2"
+printf "%s%s\n" "sha256:  " "$sha256"
 echo
 
 printf "Tracked git files:       %d\n" "$git_files_count"

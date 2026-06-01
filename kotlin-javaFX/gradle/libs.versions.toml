@@ -1,6 +1,6 @@
 [versions]
 # Version constraints (npm/semver syntax):
-#   {{ version_policy }}            = never update (default)
+#   @pin            = never update (default)
 #   @*              = always update to latest
 #   @^1.2.3         = minor updates (>=1.2.3 <2.0.0)
 #   @~1.2.3         = patch updates (>=1.2.3 <1.3.0)
@@ -11,27 +11,27 @@
 
 # JDK version for toolchain
 jdk = "{{ @@01|(21|23|25)|JDK version (21, 23, or 25)=25@@jdk_version }}"
-# https://mvnrepository.com/artifact/org.jetbrains.kotlin/kotlin-stdlib {{ version_policy }}
+# https://mvnrepository.com/artifact/org.jetbrains.kotlin/kotlin-stdlib @pin
 kotlin = "{{ kotlin_version }}"
-# https://mvnrepository.com/artifact/com.gradleup.shadow/shadow-gradle-plugin {{ version_policy }}
+# https://mvnrepository.com/artifact/com.gradleup.shadow/shadow-gradle-plugin @pin
 shadow = "9.3.1"
-# https://mvnrepository.com/artifact/org.beryx.jlink/org.beryx.jlink.gradle.plugin {{ version_policy }}
+# https://mvnrepository.com/artifact/org.beryx.jlink/org.beryx.jlink.gradle.plugin @pin
 beryx_jlink = "3.1.3"
-# https://mvnrepository.com/artifact/org.openjfx/javafx-base {{ version_policy }}
+# https://mvnrepository.com/artifact/org.openjfx/javafx-base @pin
 javafx = "25.0.1"
-# https://mvnrepository.com/artifact/org.kordamp.ikonli/ikonli-javafx {{ version_policy }}
+# https://mvnrepository.com/artifact/org.kordamp.ikonli/ikonli-javafx @pin
 ikonli = "12.4.0"
-# https://mvnrepository.com/artifact/com.dlsc.formsfx/formsfx-core {{ version_policy }}
+# https://mvnrepository.com/artifact/com.dlsc.formsfx/formsfx-core @pin
 formsfx = "11.6.0"
-# https://mvnrepository.com/artifact/org.controlsfx/controlsfx {{ version_policy }}
+# https://mvnrepository.com/artifact/org.controlsfx/controlsfx @pin
 controlsfx = "11.2.2"
-# https://mvnrepository.com/artifact/net.synedra/validatorfx {{ version_policy }}
+# https://mvnrepository.com/artifact/net.synedra/validatorfx @pin
 validatorfx = "0.6.3"
-# https://mvnrepository.com/artifact/org.junit.jupiter/junit-jupiter {{ version_policy }}
+# https://mvnrepository.com/artifact/org.junit.jupiter/junit-jupiter @pin
 junit = "5.13.4"
-# https://mvnrepository.com/artifact/org.assertj/assertj-core {{ version_policy }}
+# https://mvnrepository.com/artifact/org.assertj/assertj-core @pin
 assertj = "3.27.3"
-# https://mvnrepository.com/artifact/io.mockk/mockk {{ version_policy }}
+# https://mvnrepository.com/artifact/io.mockk/mockk @pin
 mockk = "1.14.9"
 
 [libraries]
