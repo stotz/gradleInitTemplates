@@ -11,19 +11,19 @@
 
 # JDK version for toolchain
 jdk = "{{ @@03|(21|24|25)|JDK version=24@@jdk_version }}"
-# https://mvnrepository.com/artifact/org.jetbrains.kotlin/kotlin-stdlib @pin
+# https://mvnrepository.com/artifact/org.jetbrains.kotlin/kotlin-stdlib {{ version_policy }}
 kotlin = "{{ kotlin_version }}"
-# https://mvnrepository.com/artifact/com.gradleup.shadow/shadow-gradle-plugin @pin
+# https://mvnrepository.com/artifact/com.gradleup.shadow/shadow-gradle-plugin {{ version_policy }}
 shadow = "9.3.1"
-# https://mvnrepository.com/artifact/org.springframework.boot/spring-boot @pin
+# https://mvnrepository.com/artifact/org.springframework.boot/spring-boot {{ version_policy }}
 spring-boot = "4.0.2"
-# https://mvnrepository.com/artifact/io.spring.gradle/dependency-management-plugin @pin
+# https://mvnrepository.com/artifact/io.spring.gradle/dependency-management-plugin {{ version_policy }}
 spring-dependency-management = "1.1.7"
-# https://mvnrepository.com/artifact/org.junit.jupiter/junit-jupiter-api @pin
+# https://mvnrepository.com/artifact/org.junit.jupiter/junit-jupiter-api {{ version_policy }}
 junit = "5.13.4"
-# https://mvnrepository.com/artifact/org.assertj/assertj-core @pin
+# https://mvnrepository.com/artifact/org.assertj/assertj-core {{ version_policy }}
 assertj = "3.27.3"
-# https://mvnrepository.com/artifact/io.mockk/mockk @pin
+# https://mvnrepository.com/artifact/io.mockk/mockk {{ version_policy }}
 mockk = "1.14.9"
 
 [libraries]

@@ -11,27 +11,27 @@
 
 # JDK version for toolchain
 jdk = "{{ @@01|(21|23|25)|JDK version (21, 23, or 25)=25@@jdk_version }}"
-# https://mvnrepository.com/artifact/org.jetbrains.kotlin/kotlin-stdlib @pin
+# https://mvnrepository.com/artifact/org.jetbrains.kotlin/kotlin-stdlib {{ version_policy }}
 kotlin = "{{ kotlin_version }}"
-# https://mvnrepository.com/artifact/com.gradleup.shadow/shadow-gradle-plugin @pin
+# https://mvnrepository.com/artifact/com.gradleup.shadow/shadow-gradle-plugin {{ version_policy }}
 shadow = "9.3.1"
-# https://mvnrepository.com/artifact/org.beryx.jlink/org.beryx.jlink.gradle.plugin @pin
+# https://mvnrepository.com/artifact/org.beryx.jlink/org.beryx.jlink.gradle.plugin {{ version_policy }}
 beryx_jlink = "3.1.3"
-# https://mvnrepository.com/artifact/org.openjfx/javafx-base @pin
+# https://mvnrepository.com/artifact/org.openjfx/javafx-base {{ version_policy }}
 javafx = "25.0.1"
-# https://mvnrepository.com/artifact/org.kordamp.ikonli/ikonli-javafx @pin
+# https://mvnrepository.com/artifact/org.kordamp.ikonli/ikonli-javafx {{ version_policy }}
 ikonli = "12.4.0"
-# https://mvnrepository.com/artifact/com.dlsc.formsfx/formsfx-core @pin
+# https://mvnrepository.com/artifact/com.dlsc.formsfx/formsfx-core {{ version_policy }}
 formsfx = "11.6.0"
-# https://mvnrepository.com/artifact/org.controlsfx/controlsfx @pin
+# https://mvnrepository.com/artifact/org.controlsfx/controlsfx {{ version_policy }}
 controlsfx = "11.2.2"
-# https://mvnrepository.com/artifact/net.synedra/validatorfx @pin
+# https://mvnrepository.com/artifact/net.synedra/validatorfx {{ version_policy }}
 validatorfx = "0.6.3"
-# https://mvnrepository.com/artifact/org.junit.jupiter/junit-jupiter @pin
+# https://mvnrepository.com/artifact/org.junit.jupiter/junit-jupiter {{ version_policy }}
 junit = "5.13.4"
-# https://mvnrepository.com/artifact/org.assertj/assertj-core @pin
+# https://mvnrepository.com/artifact/org.assertj/assertj-core {{ version_policy }}
 assertj = "3.27.3"
-# https://mvnrepository.com/artifact/io.mockk/mockk @pin
+# https://mvnrepository.com/artifact/io.mockk/mockk {{ version_policy }}
 mockk = "1.14.9"
 
 [libraries]
