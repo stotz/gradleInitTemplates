@@ -107,7 +107,7 @@
 <!-- vregion:begin -->
 ### UI Libraries
 - **Ikonli** (<!--v:ikonli-->12.4.0<!--/v-->) - Icon support
-- **ControlsFX** (<!--v:controlsfx-->11.2.2<!--/v-->) - Enhanced controls
+- **ControlsFX** (<!--v:controlsfx-->11.2.3<!--/v-->) - Enhanced controls
 - **FormsFX** (<!--v:formsfx-->11.6.0<!--/v-->) - Form framework
 - **ValidatorFX** (<!--v:validatorfx-->0.6.3<!--/v-->) - Validation
 

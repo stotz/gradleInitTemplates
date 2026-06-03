@@ -17,15 +17,15 @@ jdk = "{{ @@03|(11|17|21|25)|JDK version=25@@jdk_version }}"
 # https://mvnrepository.com/artifact/org.jetbrains.kotlin/kotlin-stdlib {{ version_policy }}
 kotlin = "{{ kotlin_version }}"
 # https://mvnrepository.com/artifact/com.gradleup.shadow/shadow-gradle-plugin {{ version_policy }}
-shadow = "9.3.1"
+shadow = "9.4.2"
 # https://mvnrepository.com/artifact/com.github.ajalt.clikt/clikt {{ version_policy }}
 clikt = "5.1.0"
 # https://mvnrepository.com/artifact/org.junit.jupiter/junit-jupiter-api {{ version_policy }}
-junit = "5.13.4"
+junit = "5.14.4"
 # https://mvnrepository.com/artifact/org.assertj/assertj-core {{ version_policy }}
-assertj = "3.27.3"
+assertj = "3.27.7"
 # https://mvnrepository.com/artifact/io.mockk/mockk {{ version_policy }}
-mockk = "1.14.9"
+mockk = "1.14.11"
 
 [libraries]
 # Clikt CLI framework with Markdown help rendering
