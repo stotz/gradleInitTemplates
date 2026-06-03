@@ -104,14 +104,16 @@
 - javafx-controls
 - javafx-web
 
+<!-- vregion:begin -->
 ### UI Libraries
-- **Ikonli** (12.4.0) - Icon support
-- **ControlsFX** (11.2.2) - Enhanced controls
-- **FormsFX** (11.6.0) - Form framework
-- **ValidatorFX** (0.6.3) - Validation
+- **Ikonli** (<!--v:ikonli-->12.4.0<!--/v-->) - Icon support
+- **ControlsFX** (<!--v:controlsfx-->11.2.2<!--/v-->) - Enhanced controls
+- **FormsFX** (<!--v:formsfx-->11.6.0<!--/v-->) - Form framework
+- **ValidatorFX** (<!--v:validatorfx-->0.6.3<!--/v-->) - Validation
 
 ### Build Tools
-- **Beryx JLink** (3.1.3) - Native packaging
+- **Beryx JLink** (<!--v:beryx_jlink-->3.1.3<!--/v-->) - Native packaging
+<!-- vregion:end -->
 
 ## 💻 Development
 

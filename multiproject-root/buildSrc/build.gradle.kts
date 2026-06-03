@@ -2,9 +2,9 @@ plugins {
     `kotlin-dsl`
 }
 
-// Kotlin 2.x supports max JDK 24 - cap at 24 if system JDK is newer
+// Toolchain uses the selected JDK (Kotlin 2.3+ supports up to JDK 25 bytecode)
 kotlin {
-    jvmToolchain(minOf(libs.versions.jdk.get().toInt(), 24))
+    jvmToolchain(libs.versions.jdk.get().toInt())
 }
 
 dependencies {

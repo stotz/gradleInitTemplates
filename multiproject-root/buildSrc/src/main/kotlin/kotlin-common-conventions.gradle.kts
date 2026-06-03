@@ -19,8 +19,8 @@ dependencies {
 }
 
 kotlin {
-    // Kotlin 2.x supports max JDK 24 - cap at 24 if configured JDK is newer
-    jvmToolchain(minOf(jdkVersion, 24))
+    // Toolchain uses the selected JDK (Kotlin 2.3+ supports up to JDK 25 bytecode)
+    jvmToolchain(jdkVersion)
 }
 
 val verboseTests = providers
