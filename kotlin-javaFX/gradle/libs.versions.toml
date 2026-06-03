@@ -9,6 +9,9 @@
 #   @>=1.0 <2.0     = range
 #   @1.x            = any 1.x version
 
+# Gradle wrapper version policy (value in gradle/wrapper/gradle-wrapper.properties)
+# gradle {{ version_policy }}
+
 # JDK version for toolchain
 jdk = "{{ @@01|(21|23|25)|JDK version (21, 23, or 25)=25@@jdk_version }}"
 # https://mvnrepository.com/artifact/org.jetbrains.kotlin/kotlin-stdlib {{ version_policy }}
