@@ -19,7 +19,7 @@ kotlin = "{{ kotlin_version }}"
 # https://mvnrepository.com/artifact/com.gradleup.shadow/shadow-gradle-plugin {{ version_policy }}
 shadow = "9.4.2"
 # https://mvnrepository.com/artifact/org.beryx.jlink/org.beryx.jlink.gradle.plugin {{ version_policy }}
-beryx_jlink = "3.1.3"
+beryx_jlink = "3.1.5"
 # https://mvnrepository.com/artifact/org.openjfx/javafx-base {{ version_policy }}
 javafx = "25.0.3"
 # https://mvnrepository.com/artifact/org.kordamp.ikonli/ikonli-javafx {{ version_policy }}
