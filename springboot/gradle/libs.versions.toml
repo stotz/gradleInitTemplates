@@ -23,7 +23,7 @@ spring-boot = "4.0.2"
 # https://mvnrepository.com/artifact/io.spring.gradle/dependency-management-plugin {{ version_policy }}
 spring-dependency-management = "1.1.7"
 # https://mvnrepository.com/artifact/org.junit.jupiter/junit-jupiter-api {{ version_policy }}
-junit = "5.14.4"
+junit = "6.1.0"
 # https://mvnrepository.com/artifact/org.assertj/assertj-core {{ version_policy }}
 assertj = "3.27.7"
 # https://mvnrepository.com/artifact/io.mockk/mockk {{ version_policy }}

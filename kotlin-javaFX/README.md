@@ -112,7 +112,7 @@
 - **ValidatorFX** (<!--v:validatorfx-->0.6.3<!--/v-->) - Validation
 
 ### Build Tools
-- **Beryx JLink** (<!--v:beryx_jlink-->3.1.3<!--/v-->) - Native packaging
+- **Beryx JLink** (<!--v:beryx_jlink-->3.1.5<!--/v-->) - Native packaging
 <!-- vregion:end -->
 
 ## 💻 Development
@@ -161,7 +161,7 @@ dependencies {
 Modify in `gradle/libs.versions.toml`:
 ```toml
 [versions]
-jdk = "23"  # Change to 21, 23, etc.
+jdk = "25"  # Change to 21, 23, etc.
 ```
 
 ### Application Properties

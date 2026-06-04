@@ -13,7 +13,7 @@
 # gradle {{ version_policy }}
 
 # JDK version for toolchain
-jdk = "{{ @@01|(21|23|25)|JDK version (21, 23, or 25)=25@@jdk_version }}"
+jdk = "{{ @@03|(24|25)|JDK version=25@@jdk_version }}"
 # https://mvnrepository.com/artifact/org.jetbrains.kotlin/kotlin-stdlib {{ version_policy }}
 kotlin = "{{ kotlin_version }}"
 # https://mvnrepository.com/artifact/com.gradleup.shadow/shadow-gradle-plugin {{ version_policy }}
@@ -21,7 +21,7 @@ shadow = "9.4.2"
 # https://mvnrepository.com/artifact/org.beryx.jlink/org.beryx.jlink.gradle.plugin {{ version_policy }}
 beryx_jlink = "3.1.5"
 # https://mvnrepository.com/artifact/org.openjfx/javafx-base {{ version_policy }}
-javafx = "25.0.3"
+javafx = "26.0.1"
 # https://mvnrepository.com/artifact/org.kordamp.ikonli/ikonli-javafx {{ version_policy }}
 ikonli = "12.4.0"
 # https://mvnrepository.com/artifact/com.dlsc.formsfx/formsfx-core {{ version_policy }}
@@ -31,7 +31,7 @@ controlsfx = "11.2.3"
 # https://mvnrepository.com/artifact/net.synedra/validatorfx {{ version_policy }}
 validatorfx = "0.6.3"
 # https://mvnrepository.com/artifact/org.junit.jupiter/junit-jupiter {{ version_policy }}
-junit = "5.14.4"
+junit = "6.1.0"
 # https://mvnrepository.com/artifact/org.assertj/assertj-core {{ version_policy }}
 assertj = "3.27.7"
 # https://mvnrepository.com/artifact/io.mockk/mockk {{ version_policy }}
