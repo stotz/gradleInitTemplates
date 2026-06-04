@@ -9,7 +9,7 @@ help: |
   
   Features:
     - Shadow plugin for fat JAR creation
-    - JUnit 5 + AssertJ + MockK testing
+    - JUnit 6 + AssertJ + MockK testing
     - Git info in JAR manifest (optional)
     - Clikt CLI framework with Markdown help (optional)
   
@@ -27,7 +27,7 @@ help: |
 requirements:
   gradle: ">=9.0"
   kotlin: ">=2.0"
-  jdk: ">=21"
+  jdk: ">=24"
 
 subproject_mode:
   build_file: build.gradle.kts.subproject
@@ -75,7 +75,7 @@ A simple single-module Kotlin project with modern Gradle Kotlin DSL configuratio
 - **Gradle Kotlin DSL** - Modern build configuration
 - **Version Catalog** - Centralized dependency management via `gradle/libs.versions.toml`
 - **JDK Toolchain** - Ensures consistent Java version across environments
-- **JUnit 5** - Modern testing framework
+- **JUnit 6** - Modern testing framework
 - **CLI Support** - Built-in `--help` and `--info` commands
 - **Optional Clikt** - Full CLI framework with Markdown help rendering
 - **Git Info** - Optional build metadata in JAR manifest

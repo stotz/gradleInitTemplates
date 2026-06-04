@@ -13,7 +13,7 @@ Simple single-module Kotlin project with Gradle Kotlin DSL.
 - JDK toolchain configuration
 - EditorConfig
 - Git ready (.gitignore)
-- JUnit 5 tests
+- JUnit 6 tests
 
 **Usage:**
 ```bash
@@ -76,13 +76,13 @@ Ktor server application.
 Modern JavaFX desktop application with Kotlin.
 
 **Features:**
-- JavaFX 25
+- JavaFX 26
 - Ikonli (icon library with FontAwesome 5)
 - ControlsFX (enhanced controls)
 - FormsFX (declarative forms)
 - ValidatorFX (input validation)
 - Beryx JLink (native packaging)
-- JDK 23 support
+- JDK 25 support
 - Cross-platform (Windows, Linux, macOS)
 
 **Usage:**
@@ -90,7 +90,7 @@ Modern JavaFX desktop application with Kotlin.
 ./gradleInit.py init my-javafx-app \
   --template kotlin-javaFX \
   --group com.mycompany \
-  --config jdk_version=23 \
+  --config jdk_version=25 \
   --config app_name="My JavaFX App"
 ```
 

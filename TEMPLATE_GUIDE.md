@@ -22,7 +22,7 @@ tags: [kotlin, gradle, tag1, tag2]
 requirements:
   gradle: ">=8.0"
   kotlin: ">=2.0"
-  jdk: ">=17"
+  jdk: ">=24"
 
 arguments:
   - name: group

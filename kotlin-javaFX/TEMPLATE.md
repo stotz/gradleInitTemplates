@@ -8,7 +8,7 @@ help: |
   Creates a modern JavaFX desktop application with Kotlin.
   
   Features:
-    - JavaFX 25 with cross-platform natives
+    - JavaFX 26 with cross-platform natives
     - Ikonli icons (FontAwesome 5)
     - ControlsFX enhanced controls
     - FormsFX declarative forms
@@ -31,7 +31,7 @@ help: |
 requirements:
   gradle: ">=9.0"
   kotlin: ">=2.0"
-  jdk: ">=21"
+  jdk: ">=24"
 
 subproject_mode:
   build_file: build.gradle.kts.subproject
@@ -72,7 +72,7 @@ arguments:
 # Kotlin JavaFX Project Template
 
 A modern JavaFX desktop application template with Kotlin, featuring:
-- **JavaFX 25** - Modern UI framework
+- **JavaFX 26** - Modern UI framework
 - **Ikonli** - Icon library with FontAwesome 5 support
 - **ControlsFX** - Enhanced controls (Notifications, PopOver)
 - **FormsFX** - Declarative form creation
@@ -88,7 +88,7 @@ A modern JavaFX desktop application template with Kotlin, featuring:
 - **JDK 23 Support** - Latest JDK with toolchain configuration
 - **Version Catalog** - Centralized dependency management
 - **JLink Packaging** - Create native installers
-- **JUnit 5** - Modern testing framework
+- **JUnit 6** - Modern testing framework
 
 ## Project Structure
 
@@ -150,7 +150,7 @@ The template uses these configuration values:
 - `main_class` - Fully qualified main class name
 - `vendor` - Application vendor name
 - `kotlin_version` - Kotlin version (from gradleInit defaults)
-- `jdk_version` - JDK version (default: 23, minimum 21)
+- `jdk_version` - JDK version (default: 25, minimum 24)
 
 ### JavaFX Dependencies
 
@@ -167,9 +167,9 @@ All JavaFX modules are included:
 
 ### UI Library Versions
 
-- **JavaFX**: 25.0.1
+- **JavaFX**: 26.0.1
 - **Ikonli**: 12.4.0
-- **ControlsFX**: 11.2.2
+- **ControlsFX**: 11.2.3
 - **FormsFX**: 11.6.0
 - **ValidatorFX**: 0.6.3
 

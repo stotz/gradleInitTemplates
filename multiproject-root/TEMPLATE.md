@@ -36,7 +36,7 @@ help: |
 requirements:
   gradle: ">=9.0"
   kotlin: ">=2.0"
-  jdk: ">=21"
+  jdk: ">=24"
 
 raw_copy:
   - dump_src.sh

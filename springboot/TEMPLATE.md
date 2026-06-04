@@ -10,7 +10,7 @@ help: |
   Features:
     - Spring Boot 4.0 with Web starter
     - Kotlin compiler options for Spring (-Xjsr305=strict)
-    - JUnit 5 testing with Spring Boot Test
+    - JUnit 6 testing with Spring Boot Test
     - Git info in JAR manifest (optional)
   
   Usage:
@@ -31,7 +31,7 @@ help: |
 requirements:
   gradle: ">=9.0"
   kotlin: ">=2.0"
-  jdk: ">=21"
+  jdk: ">=24"
 
 subproject_mode:
   build_file: build.gradle.kts.subproject

@@ -32,7 +32,7 @@ help: |
 requirements:
   gradle: ">=9.0"
   kotlin: ">=2.0"
-  jdk: ">=21"
+  jdk: ">=24"
 
 subproject_mode:
   build_file: build.gradle.kts.subproject

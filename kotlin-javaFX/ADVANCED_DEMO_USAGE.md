@@ -220,9 +220,9 @@ src/main/kotlin/
 ## Dependencies
 
 Both applications use the same dependencies from `build.gradle.kts`:
-- JavaFX 25
+- JavaFX 26
 - Ikonli 12.4.0
-- ControlsFX 11.2.2
+- ControlsFX 11.2.3
 - FormsFX 11.6.0
 - ValidatorFX 0.6.3
 

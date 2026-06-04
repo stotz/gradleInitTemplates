@@ -37,7 +37,7 @@
 
 ## ✨ Features
 
-- **JavaFX 25** - Modern desktop UI framework
+- **JavaFX 26** - Modern desktop UI framework
 - **Ikonli** - Icon library with FontAwesome 5
 - **ControlsFX** - Enhanced controls (Notifications, PopOver)
 - **FormsFX** - Declarative form creation
@@ -161,7 +161,7 @@ dependencies {
 Modify in `gradle/libs.versions.toml`:
 ```toml
 [versions]
-jdk = "25"  # Change to 21, 23, etc.
+jdk = "25"  # Change to 24 or 25
 ```
 
 ### Application Properties
@@ -183,7 +183,7 @@ Customize in `build.gradle.kts` `jlink` block for:
 
 ## 🧪 Testing
 
-The project uses JUnit 5 for testing.
+The project uses JUnit 6 for testing.
 
 ### Run Tests
 ```bash

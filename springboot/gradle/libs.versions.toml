@@ -13,13 +13,13 @@
 # gradle {{ version_policy }}
 
 # JDK version for toolchain
-jdk = "{{ @@03|(21|24|25)|JDK version=24@@jdk_version }}"
+jdk = "{{ @@03|(24|25)|JDK version=25@@jdk_version }}"
 # https://mvnrepository.com/artifact/org.jetbrains.kotlin/kotlin-stdlib {{ version_policy }}
 kotlin = "{{ kotlin_version }}"
 # https://mvnrepository.com/artifact/com.gradleup.shadow/shadow-gradle-plugin {{ version_policy }}
 shadow = "9.4.2"
 # https://mvnrepository.com/artifact/org.springframework.boot/spring-boot {{ version_policy }}
-spring-boot = "4.0.2"
+spring-boot = "4.0.6"
 # https://mvnrepository.com/artifact/io.spring.gradle/dependency-management-plugin {{ version_policy }}
 spring-dependency-management = "1.1.7"
 # https://mvnrepository.com/artifact/org.junit.jupiter/junit-jupiter-api {{ version_policy }}
