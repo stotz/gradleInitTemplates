@@ -19,7 +19,7 @@ kotlin = "{{ kotlin_version }}"
 # https://mvnrepository.com/artifact/com.gradleup.shadow/shadow-gradle-plugin {{ version_policy }}
 shadow = "9.4.2"
 # https://mvnrepository.com/artifact/org.springframework.boot/spring-boot {{ version_policy }}
-spring-boot = "4.0.6"
+spring-boot = "4.1.0"
 # https://mvnrepository.com/artifact/io.spring.gradle/dependency-management-plugin {{ version_policy }}
 spring-dependency-management = "1.1.7"
 # https://mvnrepository.com/artifact/org.junit.jupiter/junit-jupiter-api {{ version_policy }}
