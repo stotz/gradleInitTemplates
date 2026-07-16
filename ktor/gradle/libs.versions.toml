@@ -17,13 +17,13 @@ jdk = "{{ @@03|(24|25)|JDK version=25@@jdk_version }}"
 # https://mvnrepository.com/artifact/org.jetbrains.kotlin/kotlin-stdlib {{ version_policy }}
 kotlin = "{{ kotlin_version }}"
 # https://mvnrepository.com/artifact/com.gradleup.shadow/shadow-gradle-plugin {{ version_policy }}
-shadow = "9.4.2"
+shadow = "9.6.0"
 # https://mvnrepository.com/artifact/io.ktor/ktor-server-core-jvm {{ version_policy }}
-ktor = "3.5.0"
+ktor = "3.5.1"
 # https://mvnrepository.com/artifact/ch.qos.logback/logback-classic {{ version_policy }}
-logback = "1.5.35"
+logback = "1.5.38"
 # https://mvnrepository.com/artifact/org.junit.jupiter/junit-jupiter-api {{ version_policy }}
-junit = "6.1.0"
+junit = "6.1.2"
 # https://mvnrepository.com/artifact/org.assertj/assertj-core {{ version_policy }}
 assertj = "3.27.7"
 # https://mvnrepository.com/artifact/io.mockk/mockk {{ version_policy }}

@@ -109,7 +109,7 @@
 - **Ikonli** (<!--v:ikonli-->12.4.0<!--/v-->) - Icon support
 - **ControlsFX** (<!--v:controlsfx-->11.2.3<!--/v-->) - Enhanced controls
 - **FormsFX** (<!--v:formsfx-->11.6.0<!--/v-->) - Form framework
-- **ValidatorFX** (<!--v:validatorfx-->0.6.3<!--/v-->) - Validation
+- **ValidatorFX** (<!--v:validatorfx-->1.0.0<!--/v-->) - Validation
 
 ### Build Tools
 - **Beryx JLink** (<!--v:beryx_jlink-->3.1.5<!--/v-->) - Native packaging
