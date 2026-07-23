@@ -16,6 +16,10 @@
 jdk = "{{ @@03|(24|25)|JDK version=25@@jdk_version }}"
 # https://mvnrepository.com/artifact/org.jetbrains.kotlin/kotlin-stdlib {{ version_policy }}
 kotlin = "{{ kotlin_version }}"
+# https://mvnrepository.com/artifact/org.jetbrains.kotlinx/kover-gradle-plugin {{ version_policy }}
+kover = "0.9.9"
+# https://plugins.gradle.org/plugin/org.cyclonedx.bom {{ version_policy }}
+cyclonedx = "3.3.0"
 # https://mvnrepository.com/artifact/com.gradleup.shadow/shadow-gradle-plugin {{ version_policy }}
 shadow = "9.6.0"
 # https://mvnrepository.com/artifact/org.springframework.boot/spring-boot {{ version_policy }}
@@ -39,6 +43,8 @@ assertj-core = { module = "org.assertj:assertj-core", version.ref = "assertj" }
 mockk = { module = "io.mockk:mockk", version.ref = "mockk" }
 
 [plugins]
+cyclonedx-bom = { id = "org.cyclonedx.bom", version.ref = "cyclonedx" }
+kover = { id = "org.jetbrains.kotlinx.kover", version.ref = "kover" }
 kotlin-jvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlin" }
 kotlin-spring = { id = "org.jetbrains.kotlin.plugin.spring", version.ref = "kotlin" }
 shadow = { id = "com.gradleup.shadow", version.ref = "shadow" }

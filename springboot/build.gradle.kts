@@ -8,6 +8,8 @@ plugins {
     alias(libs.plugins.shadow)
     alias(libs.plugins.spring.boot)
     alias(libs.plugins.spring.dependency.management)
+    alias(libs.plugins.kover)
+    alias(libs.plugins.cyclonedx.bom)
 }
 
 group = "{{ @@01|Maven group ID (e.g. com.company)=com.example@@group }}"
@@ -130,4 +132,53 @@ tasks.jar {
             )
         }
     }
+}
+
+// ============================================================================
+// Coverage gate (Kover). The verification rule is a ratchet: the 50 percent
+// bound is a deliberately conservative starting floor, not the ambition -
+// raise it toward the measured value after each coverage run, so the gate can
+// only ever tighten. The filter excludes are the project-specific part:
+// exclude code whose execution coverage lives outside unit tests (env-gated
+// integration tests, live operations, manual tooling, entry-point wiring),
+// because measuring it in a unit-only run would only produce noise. Extend
+// the excludes as the project grows.
+// koverVerify runs after every `test` invocation; koverHtmlReport writes
+// build/reports/kover/html.
+// ============================================================================
+kover {
+    reports {
+        filters {
+            excludes {
+                classes(
+                    "{{ group }}.ApplicationKt",
+                    "{{ group }}.{{ project_name | PascalCase }}Application"
+                )
+            }
+        }
+        verify {
+            rule("line coverage of unit-testable logic") {
+                minBound(50)
+            }
+        }
+    }
+}
+
+tasks.test {
+    finalizedBy(tasks.named("koverVerify"))
+}
+
+// ============================================================================
+// SBOM (CycloneDX): `./gradlew cyclonedxBom` writes build/reports/cyclonedx/bom.{json,xml}.
+// The jar manifest answers "which of OUR code runs"; the SBOM answers "which
+// dependencies in which versions" - machine-readable for CVE scanning and
+// license review. Generated on demand, not on every build.
+// Scoped to the runtime classpath, deliberately: the zero-config default
+// aggregates every resolvable configuration (test frameworks, the Kover agent,
+// embedded compilers), none of which ships in production. An SBOM must answer
+// "what runs in production".
+// ============================================================================
+tasks.cyclonedxDirectBom {
+    projectType = org.cyclonedx.model.Component.Type.APPLICATION
+    includeConfigs = listOf("runtimeClasspath")
 }

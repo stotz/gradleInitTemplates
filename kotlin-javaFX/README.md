@@ -112,7 +112,7 @@
 - **ValidatorFX** (<!--v:validatorfx-->1.0.0<!--/v-->) - Validation
 
 ### Build Tools
-- **Beryx JLink** (<!--v:beryx_jlink-->3.1.5<!--/v-->) - Native packaging
+- **Beryx JLink** (<!--v:beryx_jlink-->4.1.0<!--/v-->) - Native packaging
 <!-- vregion:end -->
 
 ## 💻 Development
