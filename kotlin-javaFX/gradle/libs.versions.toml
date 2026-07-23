@@ -21,11 +21,11 @@ kover = "0.9.9"
 # https://plugins.gradle.org/plugin/org.cyclonedx.bom {{ version_policy }}
 cyclonedx = "3.3.0"
 # https://mvnrepository.com/artifact/com.gradleup.shadow/shadow-gradle-plugin {{ version_policy }}
-shadow = "9.6.0"
+shadow = "9.6.1"
 # https://plugins.gradle.org/plugin/org.beryx.jlink {{ version_policy }}
 beryx_jlink = "4.1.0"
 # https://mvnrepository.com/artifact/org.openjfx/javafx-base {{ version_policy }}
-javafx = "26.0.1"
+javafx = "26.0.2"
 # https://mvnrepository.com/artifact/org.kordamp.ikonli/ikonli-javafx {{ version_policy }}
 ikonli = "12.4.0"
 # https://mvnrepository.com/artifact/com.dlsc.formsfx/formsfx-core {{ version_policy }}
