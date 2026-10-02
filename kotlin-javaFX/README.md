@@ -107,12 +107,12 @@
 <!-- vregion:begin -->
 ### UI Libraries
 - **Ikonli** (<!--v:ikonli-->12.4.0<!--/v-->) - Icon support
-- **ControlsFX** (<!--v:controlsfx-->11.2.3<!--/v-->) - Enhanced controls
+- **ControlsFX** (<!--v:controlsfx-->11.2.5<!--/v-->) - Enhanced controls
 - **FormsFX** (<!--v:formsfx-->11.6.0<!--/v-->) - Form framework
 - **ValidatorFX** (<!--v:validatorfx-->1.0.0<!--/v-->) - Validation
 
 ### Build Tools
-- **Beryx JLink** (<!--v:beryx_jlink-->4.1.0<!--/v-->) - Native packaging
+- **Beryx JLink** (<!--v:beryx_jlink-->4.1.1<!--/v-->) - Native packaging
 <!-- vregion:end -->
 
 ## 💻 Development
