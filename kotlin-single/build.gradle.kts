@@ -6,15 +6,28 @@ plugins {
     alias(libs.plugins.kotlin.jvm)
     alias(libs.plugins.shadow)
     application
+{% if enable_kover %}
     alias(libs.plugins.kover)
+{% endif %}
+{% if enable_sbom %}
     alias(libs.plugins.cyclonedx.bom)
+{% endif %}
 }
 
 group = "{{ @@01|Maven group ID (e.g. com.company)=com.example@@group }}"
 version = "{{ @@02|Application version (e.g. 1.0.0)=1.0.0@@version }}"
 
 repositories {
+{% if repository_url %}
+    maven { url = uri("{{ repository_url }}") }
+{% else %}
     mavenCentral()
+{% endif %}
+}
+
+tasks.withType<JavaCompile>().configureEach {
+    // javac defaults to the platform encoding (Cp1252 on Windows)
+    options.encoding = "UTF-8"
 }
 
 dependencies {
@@ -142,6 +155,7 @@ tasks.jar {
     }
 }
 
+{% if enable_kover %}
 // ============================================================================
 // Coverage gate (Kover). The verification rule is a ratchet: the 50 percent
 // bound is a deliberately conservative starting floor, not the ambition -
@@ -174,7 +188,8 @@ kover {
 tasks.test {
     finalizedBy(tasks.named("koverVerify"))
 }
-
+{% endif %}
+{% if enable_sbom %}
 // ============================================================================
 // SBOM (CycloneDX): `./gradlew cyclonedxBom` writes build/reports/cyclonedx/bom.{json,xml}.
 // The jar manifest answers "which of OUR code runs"; the SBOM answers "which
@@ -189,3 +204,4 @@ tasks.cyclonedxDirectBom {
     projectType = org.cyclonedx.model.Component.Type.APPLICATION
     includeConfigs = listOf("runtimeClasspath")
 }
+{% endif %}

@@ -2,10 +2,10 @@ plugins {
     `kotlin-dsl`
 }
 
-// Toolchain uses the selected JDK (Kotlin 2.3+ supports up to JDK 25 bytecode)
-kotlin {
-    jvmToolchain(libs.versions.jdk.get().toInt())
-}
+// No toolchain pin on purpose: buildSrc is build code and compiles with the
+// JDK that runs Gradle (gradle/gradle-daemon-jvm.properties). The project
+// toolchain ('jdk' in gradle/libs.versions.toml) applies to the modules only,
+// so a legacy toolchain never breaks the build logic.
 
 dependencies {
     implementation(libs.plugins.kotlin.jvm.get().let { 

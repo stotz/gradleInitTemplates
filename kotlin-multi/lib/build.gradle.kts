@@ -1,9 +1,14 @@
 plugins {
     id("kotlin-common-conventions")
+{% if enable_kover %}
     alias(libs.plugins.kover)
+{% endif %}
+{% if enable_sbom %}
     alias(libs.plugins.cyclonedx.bom)
+{% endif %}
 }
 
+{% if enable_kover %}
 // ============================================================================
 // Coverage gate (Kover). The verification rule is a ratchet: the 50 percent
 // bound is a deliberately conservative starting floor, not the ambition -
@@ -29,7 +34,8 @@ kover {
 tasks.test {
     finalizedBy(tasks.named("koverVerify"))
 }
-
+{% endif %}
+{% if enable_sbom %}
 // ============================================================================
 // SBOM (CycloneDX): `./gradlew cyclonedxBom` writes build/reports/cyclonedx/bom.{json,xml}.
 // The jar manifest answers "which of OUR code runs"; the SBOM answers "which
@@ -44,3 +50,4 @@ tasks.cyclonedxDirectBom {
     projectType = org.cyclonedx.model.Component.Type.LIBRARY
     includeConfigs = listOf("runtimeClasspath")
 }
+{% endif %}

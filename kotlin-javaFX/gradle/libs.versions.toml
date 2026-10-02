@@ -16,10 +16,14 @@
 jdk = "{{ @@03|(24|25)|JDK version=25@@jdk_version }}"
 # https://mvnrepository.com/artifact/org.jetbrains.kotlin/kotlin-stdlib {{ version_policy }}
 kotlin = "{{ kotlin_version }}"
+{% if enable_kover %}
 # https://mvnrepository.com/artifact/org.jetbrains.kotlinx/kover-gradle-plugin {{ version_policy }}
 kover = "0.9.11"
+{% endif %}
+{% if enable_sbom %}
 # https://plugins.gradle.org/plugin/org.cyclonedx.bom {{ version_policy }}
 cyclonedx = "3.4.1"
+{% endif %}
 # https://mvnrepository.com/artifact/com.gradleup.shadow/shadow-gradle-plugin {{ version_policy }}
 shadow = "9.6.1"
 # https://plugins.gradle.org/plugin/org.beryx.jlink {{ version_policy }}
@@ -52,12 +56,17 @@ validatorfx = { module = "net.synedra:validatorfx", version.ref = "validatorfx" 
 ikonli-javafx = { module = "org.kordamp.ikonli:ikonli-javafx", version.ref = "ikonli" }
 ikonli-fontawesome5 = { module = "org.kordamp.ikonli:ikonli-fontawesome5-pack", version.ref = "ikonli" }
 junit-jupiter = { module = "org.junit.jupiter:junit-jupiter", version.ref = "junit" }
+junit-platform-launcher = { module = "org.junit.platform:junit-platform-launcher", version.ref = "junit" }
 assertj-core = { module = "org.assertj:assertj-core", version.ref = "assertj" }
 mockk = { module = "io.mockk:mockk", version.ref = "mockk" }
 
 [plugins]
+{% if enable_sbom %}
 cyclonedx-bom = { id = "org.cyclonedx.bom", version.ref = "cyclonedx" }
+{% endif %}
+{% if enable_kover %}
 kover = { id = "org.jetbrains.kotlinx.kover", version.ref = "kover" }
+{% endif %}
 kotlin-jvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlin" }
 shadow = { id = "com.gradleup.shadow", version.ref = "shadow" }
 beryx-jlink = { id = "org.beryx.jlink", version.ref = "beryx_jlink" }

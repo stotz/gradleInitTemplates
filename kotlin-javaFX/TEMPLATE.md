@@ -67,6 +67,20 @@ arguments:
     help: Application display name (defaults to project name)
     context_key: app_name
     required: false
+  - name: enable_kover
+    type: boolean
+    help: Apply the Kover coverage plugin (reports and, where tests exist, the ratchet gate)
+    context_key: enable_kover
+    default: true
+    required: false
+
+  - name: enable_sbom
+    type: boolean
+    help: Apply the CycloneDX plugin for on-demand SBOM generation
+    context_key: enable_sbom
+    default: true
+    required: false
+
 ---
 
 # Kotlin JavaFX Project Template

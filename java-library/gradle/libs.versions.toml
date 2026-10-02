@@ -12,10 +12,9 @@
 # Gradle wrapper version policy (value in gradle/wrapper/gradle-wrapper.properties)
 # gradle {{ version_policy }}
 
-# JDK version for toolchain
+# JDK version for toolchain. For a legacy toolchain (e.g. 8) edit this value
+# after generation; the build/daemon JDK is independent.
 jdk = "{{ @@03|(24|25)|JDK version=25@@jdk_version }}"
-# https://mvnrepository.com/artifact/org.jetbrains.kotlin/kotlin-stdlib {{ version_policy }}
-kotlin = "{{ kotlin_version }}"
 {% if enable_kover %}
 # https://mvnrepository.com/artifact/org.jetbrains.kotlinx/kover-gradle-plugin {{ version_policy }}
 kover = "0.9.11"
@@ -24,20 +23,15 @@ kover = "0.9.11"
 # https://plugins.gradle.org/plugin/org.cyclonedx.bom {{ version_policy }}
 cyclonedx = "3.4.1"
 {% endif %}
-# https://mvnrepository.com/artifact/com.gradleup.shadow/shadow-gradle-plugin {{ version_policy }}
-shadow = "9.6.1"
-# https://mvnrepository.com/artifact/org.junit.jupiter/junit-jupiter-api {{ version_policy }}
-junit = "6.1.3"
+# https://mvnrepository.com/artifact/org.junit.jupiter/junit-jupiter {{ version_policy }}
+junit = "6.1.2"
 # https://mvnrepository.com/artifact/org.assertj/assertj-core {{ version_policy }}
 assertj = "3.27.7"
-# https://mvnrepository.com/artifact/io.mockk/mockk {{ version_policy }}
-mockk = "1.14.11"
 
 [libraries]
 junit-jupiter = { module = "org.junit.jupiter:junit-jupiter", version.ref = "junit" }
 junit-platform-launcher = { module = "org.junit.platform:junit-platform-launcher", version.ref = "junit" }
 assertj-core = { module = "org.assertj:assertj-core", version.ref = "assertj" }
-mockk = { module = "io.mockk:mockk", version.ref = "mockk" }
 
 [plugins]
 {% if enable_sbom %}
@@ -46,5 +40,3 @@ cyclonedx-bom = { id = "org.cyclonedx.bom", version.ref = "cyclonedx" }
 {% if enable_kover %}
 kover = { id = "org.jetbrains.kotlinx.kover", version.ref = "kover" }
 {% endif %}
-kotlin-jvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlin" }
-shadow = { id = "com.gradleup.shadow", version.ref = "shadow" }

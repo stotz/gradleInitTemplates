@@ -64,6 +64,20 @@ arguments:
     context_key: enable_clikt
     default: false
     required: false
+  - name: enable_kover
+    type: boolean
+    help: Apply the Kover coverage plugin (reports and, where tests exist, the ratchet gate)
+    context_key: enable_kover
+    default: true
+    required: false
+
+  - name: enable_sbom
+    type: boolean
+    help: Apply the CycloneDX plugin for on-demand SBOM generation
+    context_key: enable_sbom
+    default: true
+    required: false
+
 ---
 
 # Kotlin Single Project Template

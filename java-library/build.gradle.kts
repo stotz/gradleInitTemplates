@@ -3,11 +3,7 @@ import java.net.InetAddress
 import java.time.Instant
 
 plugins {
-    alias(libs.plugins.kotlin.jvm)
-    alias(libs.plugins.kotlin.spring)
-    alias(libs.plugins.shadow)
-    alias(libs.plugins.spring.boot)
-    alias(libs.plugins.spring.dependency.management)
+    `java-library`
 {% if enable_kover %}
     alias(libs.plugins.kover)
 {% endif %}
@@ -17,7 +13,7 @@ plugins {
 }
 
 group = "{{ @@01|Maven group ID (e.g. com.company)=com.example@@group }}"
-version = "{{ @@02|Application version (e.g. 1.0.0)=1.0.0@@version }}"
+version = "{{ @@02|Library version (e.g. 1.0.0)=1.0.0@@version }}"
 
 repositories {
 {% if repository_url %}
@@ -27,32 +23,30 @@ repositories {
 {% endif %}
 }
 
+java {
+    // Project toolchain from the catalog ('jdk'). Independent of the JDK that
+    // runs Gradle (gradle/gradle-daemon-jvm.properties): a legacy toolchain such
+    // as 8 can be paired with a modern daemon. Offline builds need that JDK
+    // installed and discoverable (org.gradle.java.installations.paths).
+    toolchain {
+        languageVersion.set(JavaLanguageVersion.of(libs.versions.jdk.get().toInt()))
+    }
+    withSourcesJar()
+}
+
 tasks.withType<JavaCompile>().configureEach {
     // javac defaults to the platform encoding (Cp1252 on Windows)
     options.encoding = "UTF-8"
 }
 
+tasks.withType<Javadoc>().configureEach {
+    options.encoding = "UTF-8"
+}
+
 dependencies {
-    implementation(libs.spring.boot.starter.web)
-    implementation(libs.kotlin.reflect)
-    
-    testImplementation(libs.spring.boot.starter.test)
-    testImplementation(kotlin("test-junit5"))
-    testRuntimeOnly("org.junit.platform:junit-platform-launcher")
-}
-
-kotlin {
-    // Toolchain uses the selected JDK (Kotlin 2.3+ supports up to JDK 25 bytecode)
-    jvmToolchain(libs.versions.jdk.get().toInt())
-    compilerOptions {
-        freeCompilerArgs.addAll("-Xjsr305=strict", "-Xannotation-default-target=param-property")
-    }
-}
-
-java {
-    toolchain {
-        languageVersion = JavaLanguageVersion.of(libs.versions.jdk.get())
-    }
+    testImplementation(libs.junit.jupiter)
+    testImplementation(libs.assertj.core)
+    testRuntimeOnly(libs.junit.platform.launcher)
 }
 
 val verboseTests = providers
@@ -97,21 +91,35 @@ tasks.test {
 }
 
 // ============================================================================
+// Reproducible archive layout: no wall-clock file timestamps, deterministic
+// entry order. Two builds of the same commit then differ only in the manifest
+// Build-Time attribute (kept deliberately: it has operational value).
+// ============================================================================
+tasks.withType<AbstractArchiveTask>().configureEach {
+    isPreserveFileTimestamps = false
+    isReproducibleFileOrder = true
+}
+
+// ============================================================================
 // Git Information (optional, enable with -PenableGitInfo=true)
-// Configuration Cache compatible using Provider API
+// Configuration Cache compatible using the Provider API. Every exec ignores
+// the exit value so a build outside a Git checkout still works. Full
+// 40-character SHA on purpose: prefix uniqueness is a property of the
+// repository at resolution time, not at build time.
 // ============================================================================
 val enableGitInfo: Provider<Boolean> = providers
     .gradleProperty("enableGitInfo")
     .map { it.toBoolean() }
     .orElse(false)
 
-// Use providers to get git info at execution time (Configuration Cache compatible)
 val gitCommit: Provider<String> = providers.exec {
-    commandLine("git", "rev-parse", "--short", "HEAD")
+    commandLine("git", "rev-parse", "HEAD")
+    isIgnoreExitValue = true
 }.standardOutput.asText.map { it.trim().ifEmpty { "unknown" } }
 
 val gitBranch: Provider<String> = providers.exec {
     commandLine("git", "rev-parse", "--abbrev-ref", "HEAD")
+    isIgnoreExitValue = true
 }.standardOutput.asText.map { it.trim().ifEmpty { "unknown" } }
 
 val gitTag: Provider<String> = providers.exec {
@@ -121,6 +129,7 @@ val gitTag: Provider<String> = providers.exec {
 
 val gitDirty: Provider<String> = providers.exec {
     commandLine("git", "status", "--porcelain")
+    isIgnoreExitValue = true
 }.standardOutput.asText.map { if (it.trim().isEmpty()) "false" else "true" }
 
 tasks.jar {
@@ -130,7 +139,7 @@ tasks.jar {
             "Implementation-Version" to version.toString(),
             "Implementation-Vendor" to "{{ group }}"
         )
-        
+
         if (enableGitInfo.get()) {
             attributes(
                 "Git-Commit" to gitCommit.get(),
@@ -153,23 +162,14 @@ tasks.jar {
 // bound is a deliberately conservative starting floor, not the ambition -
 // raise it toward the measured value after each coverage run, so the gate can
 // only ever tighten. The filter excludes are the project-specific part:
-// exclude code whose execution coverage lives outside unit tests (env-gated
-// integration tests, live operations, manual tooling, entry-point wiring),
-// because measuring it in a unit-only run would only produce noise. Extend
-// the excludes as the project grows.
+// exclude code whose execution coverage lives outside unit tests (generated
+// stubs, integration-only code), because measuring it in a unit-only run
+// would only produce noise.
 // koverVerify runs after every `test` invocation; koverHtmlReport writes
 // build/reports/kover/html.
 // ============================================================================
 kover {
     reports {
-        filters {
-            excludes {
-                classes(
-                    "{{ group }}.ApplicationKt",
-                    "{{ group }}.{{ project_name | PascalCase }}Application"
-                )
-            }
-        }
         verify {
             rule("line coverage of unit-testable logic") {
                 minBound(50)
@@ -188,13 +188,11 @@ tasks.test {
 // The jar manifest answers "which of OUR code runs"; the SBOM answers "which
 // dependencies in which versions" - machine-readable for CVE scanning and
 // license review. Generated on demand, not on every build.
-// Scoped to the runtime classpath, deliberately: the zero-config default
-// aggregates every resolvable configuration (test frameworks, the Kover agent,
-// embedded compilers), none of which ships in production. An SBOM must answer
-// "what runs in production".
+// Scoped to the runtime classpath, deliberately: test frameworks and build
+// agents never ship. An SBOM must answer "what runs in production".
 // ============================================================================
 tasks.cyclonedxDirectBom {
-    projectType = org.cyclonedx.model.Component.Type.APPLICATION
+    projectType = org.cyclonedx.model.Component.Type.LIBRARY
     includeConfigs = listOf("runtimeClasspath")
 }
 {% endif %}

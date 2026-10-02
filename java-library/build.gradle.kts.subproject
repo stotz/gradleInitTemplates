@@ -1,8 +1,6 @@
 plugins {
-    id("kotlin-common-conventions")
-    alias(libs.plugins.kotlin.serialization)
-    alias(libs.plugins.ktor)
-    application
+    id("java-common-conventions")
+    `java-library`
 {% if enable_kover %}
     alias(libs.plugins.kover)
 {% endif %}
@@ -11,26 +9,13 @@ plugins {
 {% endif %}
 }
 
-application {
-    mainClass.set("io.ktor.server.netty.EngineMain")
-}
-
-tasks.shadowJar {
-    archiveClassifier.set("all")
-    mergeServiceFiles()
+java {
+    withSourcesJar()
 }
 
 dependencies {
-    implementation(libs.ktor.server.core.jvm)
-    implementation(libs.ktor.server.netty)
-    implementation(libs.ktor.server.core)
-    implementation(libs.ktor.server.config.yaml)
-    implementation(libs.ktor.server.content.negotiation)
-    implementation(libs.ktor.serialization.kotlinx.json)
-    implementation(libs.logback.classic)
-
-    testImplementation(libs.ktor.server.test.host)
-    testImplementation(kotlin("test"))
+    // api(...)            exposed to consumers of this library
+    // implementation(...) internal to this module
 }
 
 {% if enable_kover %}
@@ -39,10 +24,9 @@ dependencies {
 // bound is a deliberately conservative starting floor, not the ambition -
 // raise it toward the measured value after each coverage run, so the gate can
 // only ever tighten. The filter excludes are the project-specific part:
-// exclude code whose execution coverage lives outside unit tests (env-gated
-// integration tests, live operations, manual tooling, entry-point wiring),
-// because measuring it in a unit-only run would only produce noise. Extend
-// the excludes as the project grows.
+// exclude code whose execution coverage lives outside unit tests (generated
+// stubs, integration-only code), because measuring it in a unit-only run
+// would only produce noise.
 // koverVerify runs after every `test` invocation; koverHtmlReport writes
 // build/reports/kover/html.
 // ============================================================================
@@ -66,13 +50,11 @@ tasks.test {
 // The jar manifest answers "which of OUR code runs"; the SBOM answers "which
 // dependencies in which versions" - machine-readable for CVE scanning and
 // license review. Generated on demand, not on every build.
-// Scoped to the runtime classpath, deliberately: the zero-config default
-// aggregates every resolvable configuration (test frameworks, the Kover agent,
-// embedded compilers), none of which ships in production. An SBOM must answer
-// "what runs in production".
+// Scoped to the runtime classpath, deliberately: test frameworks and build
+// agents never ship. An SBOM must answer "what runs in production".
 // ============================================================================
 tasks.cyclonedxDirectBom {
-    projectType = org.cyclonedx.model.Component.Type.APPLICATION
+    projectType = org.cyclonedx.model.Component.Type.LIBRARY
     includeConfigs = listOf("runtimeClasspath")
 }
 {% endif %}

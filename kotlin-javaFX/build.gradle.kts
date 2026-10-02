@@ -8,15 +8,28 @@ plugins {
     alias(libs.plugins.kotlin.jvm)
     alias(libs.plugins.shadow)
     alias(libs.plugins.beryx.jlink)
+{% if enable_kover %}
     alias(libs.plugins.kover)
+{% endif %}
+{% if enable_sbom %}
     alias(libs.plugins.cyclonedx.bom)
+{% endif %}
 }
 
 group = "{{ @@02|Maven group ID (e.g. com.company)=com.example@@group }}"
 version = "{{ @@03|Application version (e.g. 1.0.0)=1.0.0@@version }}"
 
 repositories {
+{% if repository_url %}
+    maven { url = uri("{{ repository_url }}") }
+{% else %}
     mavenCentral()
+{% endif %}
+}
+
+tasks.withType<JavaCompile>().configureEach {
+    // javac defaults to the platform encoding (Cp1252 on Windows)
+    options.encoding = "UTF-8"
 }
 
 val os = org.gradle.internal.os.OperatingSystem.current()
@@ -151,6 +164,7 @@ tasks.jar {
     }
 }
 
+{% if enable_kover %}
 // ============================================================================
 // Coverage reporting (Kover). No verification gate yet: the template ships only
 // smoke tests, and JavaFX UI code needs TestFX-based tests before a line
@@ -161,7 +175,8 @@ tasks.jar {
 // with a conservative floor, and raise it toward the measured value after
 // each coverage run. koverHtmlReport writes build/reports/kover/html.
 // ============================================================================
-
+{% endif %}
+{% if enable_sbom %}
 // ============================================================================
 // SBOM (CycloneDX): `./gradlew cyclonedxBom` writes build/reports/cyclonedx/bom.{json,xml}.
 // The jar manifest answers "which of OUR code runs"; the SBOM answers "which
@@ -176,3 +191,4 @@ tasks.cyclonedxDirectBom {
     projectType = org.cyclonedx.model.Component.Type.APPLICATION
     includeConfigs = listOf("runtimeClasspath")
 }
+{% endif %}

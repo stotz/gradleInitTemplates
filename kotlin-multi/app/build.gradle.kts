@@ -1,7 +1,11 @@
 plugins {
     id("kotlin-application-conventions")
+{% if enable_kover %}
     alias(libs.plugins.kover)
+{% endif %}
+{% if enable_sbom %}
     alias(libs.plugins.cyclonedx.bom)
+{% endif %}
 }
 
 dependencies {
@@ -12,6 +16,7 @@ application {
     mainClass.set("{{ group }}.app.MainKt")
 }
 
+{% if enable_kover %}
 // ============================================================================
 // Coverage reporting (Kover). No verification gate yet: the app module is
 // entry-point wiring around :lib; add the gate once it gains unit-testable
@@ -22,7 +27,8 @@ application {
 // with a conservative floor, and raise it toward the measured value after
 // each coverage run. koverHtmlReport writes build/reports/kover/html.
 // ============================================================================
-
+{% endif %}
+{% if enable_sbom %}
 // ============================================================================
 // SBOM (CycloneDX): `./gradlew cyclonedxBom` writes build/reports/cyclonedx/bom.{json,xml}.
 // The jar manifest answers "which of OUR code runs"; the SBOM answers "which
@@ -37,3 +43,4 @@ tasks.cyclonedxDirectBom {
     projectType = org.cyclonedx.model.Component.Type.APPLICATION
     includeConfigs = listOf("runtimeClasspath")
 }
+{% endif %}
