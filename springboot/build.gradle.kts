@@ -19,6 +19,9 @@ plugins {
 group = "{{ @@01|Maven group ID (e.g. com.company)=com.example@@group }}"
 version = "{{ @@02|Application version (e.g. 1.0.0)=1.0.0@@version }}"
 
+// Project toolchain version from the catalog (used by toolchain and test JVM flags)
+val jdkVersion = libs.versions.jdk.get().toInt()
+
 repositories {
 {% if repository_url %}
     maven { url = uri("{{ repository_url }}") }
@@ -43,7 +46,7 @@ dependencies {
 
 kotlin {
     // Toolchain uses the selected JDK (Kotlin 2.3+ supports up to JDK 25 bytecode)
-    jvmToolchain(libs.versions.jdk.get().toInt())
+    jvmToolchain(jdkVersion)
     compilerOptions {
         freeCompilerArgs.addAll("-Xjsr305=strict", "-Xannotation-default-target=param-property")
     }
@@ -51,7 +54,7 @@ kotlin {
 
 java {
     toolchain {
-        languageVersion = JavaLanguageVersion.of(libs.versions.jdk.get())
+        languageVersion = JavaLanguageVersion.of(jdkVersion)
     }
 }
 
@@ -62,6 +65,21 @@ val verboseTests = providers
 
 tasks.test {
     useJUnitPlatform()
+
+    // mockk uses byte-buddy, which attaches an agent and calls sun.misc.Unsafe on
+    // JDK 24+. These flags silence the resulting VM warnings so test output stays
+    // clean (harmless for modules without mockk). Guarded by the toolchain version:
+    // the flags do not exist on older JVMs and would make the test JVM refuse to
+    // start (e.g. a legacy toolchain 8).
+    //   -XX:+EnableDynamicAgentLoading         dynamic agent self-attach warning (JDK 21+)
+    //   -Xshare:off                            CDS warning (agent appends to the bootstrap classpath)
+    //   --sun-misc-unsafe-memory-access=allow  sun.misc.Unsafe deprecation warnings (JDK 23+)
+    if (jdkVersion >= 21) {
+        jvmArgs("-XX:+EnableDynamicAgentLoading", "-Xshare:off")
+    }
+    if (jdkVersion >= 23) {
+        jvmArgs("--sun-misc-unsafe-memory-access=allow")
+    }
 
     testLogging {
         // ./gradlew test --rerun-tasks

@@ -161,7 +161,6 @@ The template uses these configuration values:
 - `group` - Your Maven group ID (e.g., `com.mycompany`)
 - `version` - Project version (default: `1.0.0`)
 - `app_name` - Application name for display
-- `main_class` - Fully qualified main class name
 - `vendor` - Application vendor name
 - `kotlin_version` - Kotlin version (from gradleInit defaults)
 - `jdk_version` - JDK version (default: 25, minimum 24)
